@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method 1</title>
+</head>
+<body>
+    <h1>Method 1</h1>
+    <form action="/method1" method="post">
+        <!-- Add form fields for Method 1 -->
+        <label for="batting_team">Select the batting team:</label>
+        <select name="batting_team" id="batting_team">
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+        <!-- Add other form fields as needed -->
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
