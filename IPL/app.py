@@ -44,11 +44,11 @@ cities = ['Ahmedabad',
     'East London',
     'Cape Town']
 
-file_path='/workspaces/projects/IPL Winner Prediction/my_pipeline.joblib'
+file_path='/workspaces/projects/IPL/my_pipeline.joblib'
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
-st.title('IPL Win Predictor')
+st.title('Winner Predictor for IPL')
 
 # Using st.columns instead of st.beta_columns
 col1, col2 = st.columns(2)
