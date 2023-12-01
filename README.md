@@ -6,7 +6,9 @@
 This machine learning-based app predicts the winner of an IPL (Indian Premier League) cricket match's second inning. It takes various factors into account, such as the batting team, bowling team, target, current score, overs, wickets, and the city where the match is being played.
 
 The prediction model utilizes a machine learning algorithm trained on historical IPL match data. The video demonstration showcases how each factor influences the prediction outcome. For example, the winning percentage increases when the match is played at the high-scoring ground in 'Sharjah' but decreases if played at 'Ahmedabad'. Additionally, factors like wickets, overs, and current score contribute to the overall prediction accuracy.
+
 https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd-c310449156ca
+
 ## Features
 
 - **Input Factors:**
