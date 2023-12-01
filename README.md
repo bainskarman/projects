@@ -19,8 +19,8 @@ https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd
   - Overs
   - Wickets
   - City
-  - 
-![ipl1](https://github.com/bainskarman/projects/assets/122693789/eb2abe91-73d3-46d7-b183-48504ef42633)
+
+![output](https://github.com/bainskarman/projects/assets/122693789/023be886-931e-49ec-9fc3-218b7e187c4b)
 
 - **City Influence:**
   -Example:
