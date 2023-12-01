@@ -1,4 +1,4 @@
-# IPL Winner Prediction App
+# IPL Winner Prediction
 
 
 ## Overview
