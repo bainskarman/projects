@@ -4,7 +4,7 @@ Welcome to my GitHub repository for end to end projects! This repository serves 
 
 ## Projects
 
-1. [IPL Winner Prediction](/workspaces/projects/IPL): As the cricket betting industry is projected to reach $2 billion in 2023, predicting match outcomes in real-time has never been more crucial.
+1. [IPL Winner Prediction](/IPL): As the cricket betting industry is projected to reach $2 billion in 2023, predicting match outcomes in real-time has never been more crucial.
 This project is dedicated to predicting the winner of IPL (Indian Premier League) cricket matches during the second inning. With the cricket betting industry expected to reach a whopping $2 billion in 2023, the ability to predict match outcomes in real-time becomes a valuable asset for bettors.
 
 https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd-c310449156ca
