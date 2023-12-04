@@ -8,9 +8,13 @@ Welcome to my GitHub repository for end to end projects! This repository serves 
 This project is dedicated to predicting the winner of IPL (Indian Premier League) cricket matches during the second inning. With the cricket betting industry expected to reach a whopping $2 billion in 2023, the ability to predict match outcomes in real-time becomes a valuable asset for bettors.
 
 https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd-c310449156ca
-2. 
-**Stock Forcasting**
-https://github.com/bainskarman/projects/assets/122693789/d1670010-3fd2-4ef3-a076-6e5a0b3d3a06
+
+
+
+2. **Stock Forcasting**
+
+https://github.com/bainskarman/projects/assets/122693789/d1670010-3fd2-4ef3-a076-6e5a0b3d3a06 
+
 ## Getting Started
 
 If you're interested in exploring a specific project, navigate to its respective folder for more details. Each project folder may contain its own README file with project-specific instructions, dependencies, and usage guidelines.
