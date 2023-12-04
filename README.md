@@ -11,7 +11,7 @@ https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd
 
 
 
-2. **Stock Forcasting**
+2. **Credit Classify**
 
 https://github.com/bainskarman/projects/assets/122693789/d1670010-3fd2-4ef3-a076-6e5a0b3d3a06 
 
