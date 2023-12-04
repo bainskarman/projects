@@ -8,9 +8,9 @@ import yfinance as yf
 
 st.title('Stock Trend Prediction')
 user_input=st.text_input('Enter stock ticker','AAPL')
-df = yf.download(user_input,start='2016-01-01')
+df = yf.download(user_input,start='2020-01-01')
 df = df.reset_index()
-st.subheader('Data after 2016')
+st.subheader('Data after 2020')
 df1=pd.DataFrame(df['Close'])
 
 from sklearn.preprocessing import MinMaxScaler
