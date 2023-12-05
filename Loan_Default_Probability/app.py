@@ -7,7 +7,7 @@ Education= ["Bachelor's", "Master's" ,'High School', 'PhD']
 LoanPurpose= ['Other', 'Auto', 'Business' ,'Home' ,'Education']
 EmploymentType = ['Full-time' ,'Unemployed' ,'Self-employed' ,'Part-time']
  
-file_path='/workspaces/projects/Loan/pipeline.joblib'
+file_path='/workspaces/projects/Loan_Default_Probability/pipe.joblib'
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
