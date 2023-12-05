@@ -1,0 +1,7 @@
+build-essential
+python3-dev
+libatlas-base-dev
+libopenblas-dev
+
+pystan==2.19.1.1
+
