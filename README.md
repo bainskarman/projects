@@ -29,6 +29,6 @@ If you're interested in exploring a specific project, navigate to its respective
 
 ## Contact
 
-If you have any questions or want to get in touch, you can reach me at [bainsprivate@gmail.com].
+If you have any questions or want to get in touch, you can reach me at [bsinghkarman@gmail.com].
 
 Happy coding!
