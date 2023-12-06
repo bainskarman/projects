@@ -6,7 +6,7 @@ import streamlit as st
 from keras.models import load_model
 import yfinance as yf
 
-st.title('Stock Trend Prediction')
+st.title('Stock Forcasting')
 user_input=st.text_input('Enter stock ticker','AAPL')
 df = yf.download(user_input,start='2020-01-01')
 df = df.reset_index()
@@ -31,7 +31,7 @@ X_train=np.array(X_train)
 y_train=np.array(y_train)
 X_train =X_train.reshape(X_train.shape[0],X_train.shape[1] , 1)
 
-model = load_model('/workspaces/projects/Stock_predict/lmodel.h5')
+model = load_model('/workspaces/projects/Stock_Forcasting/lmodel.h5')
 
 y_pred= model.predict(X_train)
 
@@ -50,3 +50,17 @@ plt.xlabel('Time')
 plt.ylabel('Price')
 plt.legend()
 st.pyplot(fig1)
+
+x_input=np.array(df1[-120:]).reshape(1,-1)
+temp_input=list(x_input)
+temp_input=temp_input[0].tolist()
+
+lst_output=[]
+n_steps=120
+i=0
+while(i<60):
+    x_input = x_input.reshape((1,120,1))
+    yhat = model.predict(x_input, verbose=0)
+    temp_input.extend(yhat[0].tolist())
+    lst_output.extend(yhat.tolist())
+    i=i+1
