@@ -25,6 +25,9 @@ https://github.com/bainskarman/projects/assets/122693789/6a52b5e0-67a0-4117-a8b0
 5.[Uber Fare Estimation](/Uber_Fare): This project focuses on predicting Uber fares based on various features such as pickup and drop-off locations, passenger count, date, and time. The goal is to create a model that accurately predicts the fare amount for a given Uber ride.
 ## Getting Started
 
+6.[Sales Analysis with SQL and PowerBI](/Sales_Report_SQL): This project focuses on data analysis using Microsoft SQL Server Management Studio (SSMS) and creating a comprehensive dashboard using Power BI. The analysis involves running SQL queries, saving query results, and leveraging the data to design and validate a Power BI dashboard.
+
+![Sales Dash](https://github.com/bainskarman/projects/assets/122693789/91186766-5ea0-4226-bf03-47d53c9803a0)
 
 If you're interested in exploring a specific project, navigate to its respective folder for more details. Each project folder may contain its own README file with project-specific instructions, dependencies, and usage guidelines.
 
