@@ -17,6 +17,7 @@ https://github.com/bainskarman/projects/assets/122693789/d1670010-3fd2-4ef3-a076
 
 3.[Stocks Forcasting](/Stock_Forcasting): Delving into Stock Forecasting, our project integrates LSTM, ANN, and Prophet models. By harnessing historical stock data, we aim to predict future trends, enabling insightful investment decisions through advanced time-series analysis.
 
+![prophet](https://github.com/bainskarman/projects/assets/122693789/31afb9f9-6a07-4b9d-b7cc-29507cf1e8ff)
 
 4.[Load Default Prediction](/Loan_Default_Probability): In our Loan Default Probability Prediction project, we employ predictive models like Random Forest, XGBoost, and logistic regression. Analyzing various factors, we aim to forecast the likelihood of loan defaults, aiding in risk assessment for sound financial decision-making.
 
