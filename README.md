@@ -39,7 +39,7 @@ https://github.com/bainskarman/projects/assets/122693789/6a52b5e0-67a0-4117-a8b0
 
 ![Predictions](https://github.com/bainskarman/projects/assets/122693789/543abbac-4aca-47c4-95b2-55ac03edd968)
 
-9.[Youtube Analysis](/workspaces/projects/Youtube Analysis)
+9.[Youtube Analysis](/workspaces/projects/Youtube_Analysis)
 
 ![Clusters](https://github.com/bainskarman/projects/assets/122693789/c8c86ebb-fcd6-434a-a05a-5cb324e718a2)
 
