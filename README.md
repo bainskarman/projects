@@ -31,10 +31,21 @@ https://github.com/bainskarman/projects/assets/122693789/6a52b5e0-67a0-4117-a8b0
 ![Sales Dash](https://github.com/bainskarman/projects/assets/122693789/91186766-5ea0-4226-bf03-47d53c9803a0)
 
 7.[Alzheimer Detection with CNN](/Alzheimer_Detection): This project focuses on utilizing Convolutional Neural Networks (CNNs) for the classification of brain MRI images to detect Alzheimer's disease. The dataset used for training and evaluation includes MRI scans from individuals with varying degrees of dementia.
+![Brain_MRI](https://github.com/bainskarman/projects/assets/122693789/cae118a9-abde-4ae5-bdb6-100b3f5d2741)
 
-![Accuracy](https://github.com/bainskarman/projects/assets/122693789/f6872abe-66a2-477f-8c6a-25f39726e072)
+![Accuracy](https://github.com/bainskarman/projects/assets/122693789/f6872abe-66a2-477f-8c6a-25f39726e072) ![Loss](https://github.com/bainskarman/projects/assets/122693789/06b6f7d6-329f-4e3a-b3e3-d38e879ccf5b)
 
-![Loss](https://github.com/bainskarman/projects/assets/122693789/06b6f7d6-329f-4e3a-b3e3-d38e879ccf5b)
+8.[TTC Delay Prediction App](/workspaces/projects/TTC_Delay_Prediction_End_to_End)
+
+![Predictions](https://github.com/bainskarman/projects/assets/122693789/543abbac-4aca-47c4-95b2-55ac03edd968)
+
+9.[Youtube Analysis](/workspaces/projects/Youtube Analysis)
+
+![Clusters](https://github.com/bainskarman/projects/assets/122693789/c8c86ebb-fcd6-434a-a05a-5cb324e718a2)
+
+10.[Maintainanace Prediction](/workspaces/projects/Maintainance_prediction)
+
+![LSTM](https://github.com/bainskarman/projects/assets/122693789/ea0fa1f2-0376-415d-8c9c-9f9203d17fbd)
 
 If you're interested in exploring a specific project, navigate to its respective folder for more details. Each project folder may contain its own README file with project-specific instructions, dependencies, and usage guidelines.
 

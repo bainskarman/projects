@@ -4,8 +4,8 @@ import joblib
 from datetime import datetime
 import numpy as np
 # Load pre-trained models
-delay_model = joblib.load("/workspaces/projects/TTC/delay.pkl")
-incident_model = joblib.load("/workspaces/projects/TTC/incident.pkl")
+delay_model = joblib.load("/workspaces/projects/TTC_Delay_Prediction_End_to_End/delay.pkl")
+incident_model = joblib.load("/workspaces/projects/TTC_Delay_Prediction_End_to_End/incident.pkl")
 
 # Streamlit UI
 st.title("TTC Delay Predictor")
