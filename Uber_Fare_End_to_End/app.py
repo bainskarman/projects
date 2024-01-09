@@ -7,7 +7,7 @@ from datetime import datetime
 from geopy.distance import geodesic
 
 
-file_path='/workspaces/projects/Uber_Fare/pipeline.joblib'
+file_path='/workspaces/projects/Uber_Fare_End_to_End/pipeline.joblib'
 with open(file_path, 'rb') as file:
     pipeline = joblib.load(file)
 
