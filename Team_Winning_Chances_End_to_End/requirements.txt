@@ -1,6 +1,6 @@
 streamlit
 pandas
 numpy
-sklearn
+scikit-learn
 flask
 joblib
