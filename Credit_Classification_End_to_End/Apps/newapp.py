@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 from zipfile import ZipFile
 import os
-from projects.Credit_Classification_End_to_End.Apps.src import transform_resp
+from src import transform_resp
 import seaborn as sns
 import matplotlib.pyplot as plt
 import joblib
@@ -13,8 +13,12 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
                         'Report a bug': 'https://github.com/bainskarman/projects/issues',
                         'About': '''Enter the following information to get your credit score for previous 12 months or select a profile from the given options. This is a mock-up intended for information only, if you wish to learn more about the model behind this please go to the GitHub [Credit Analysis](github.com/bainskarman/projects/Credit_Classification_End_to_End)''' })
 
-model = joblib.load('C:/Users/bains/Downloads/GitHub24/projects/Credit_Classification_End_to_End/model.pkl')
-
+if 'GITHUB_ACTIONS' in os.environ:
+    repo_path = '/github/workspace/projects/Credit_Classification_End_to_End/Models/model.pkl'
+else:
+    # If running locally, set the path accordingly
+    repo_path = 'projects/Credit_Classification_End_to_End/Models/model.pkl'
+model = joblib.load(repo_path)
 st.title('Credit Score Analysis')
 
 st.markdown('''Credit Industry uses credit scores to evaluate the potential risk posed by lending money to consumers and to mitigate losses due to bad debt. Credit scoring is not limited to banks. Other organizations, such as mobile phone companies, insurance companies, landlords, and government departments employ the same techniques. Credit scoring also has a lot of overlap with data mining, which uses many similar techniques. These techniques combine thousands of factors but are similar or identical. Hereby, I have used Machine Learning to predict the credit score of a person based on the information provided by them. ''')
