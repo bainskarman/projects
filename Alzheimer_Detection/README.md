@@ -3,6 +3,7 @@
 ## Overview
 
 This project focuses on utilizing Convolutional Neural Networks (CNNs) for the classification of brain MRI images to detect Alzheimer's disease. The dataset used for training and evaluation includes MRI scans from individuals with varying degrees of dementia.
+This is just the basic idea for full project visit [Alzheimer](https://github.com/bainskarman/Alzheimer-)
 
 ## Requirements
 

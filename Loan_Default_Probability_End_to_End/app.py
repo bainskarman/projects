@@ -2,15 +2,16 @@ import pandas as pd
 import numpy as np
 import joblib
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 Education= ["Bachelor's", "Master's" ,'High School', 'PhD']
 LoanPurpose= ['Other', 'Auto', 'Business' ,'Home' ,'Education']
 EmploymentType = ['Full-time' ,'Unemployed' ,'Self-employed' ,'Part-time']
  
-file_path='/workspaces/projects/Loan_Default_Probability/pipe.joblib'
-with open(file_path, 'rb') as file:
-    pipe = joblib.load(file)
-
+current_path = os.getcwd()
+path = os.path.join(current_path, 'Loan_Default_Probability/pipe.joblib')
+pipe =joblib.load(path)
 st.title('Loan Default Prediction')
 
 col1, col2 = st.columns(2)
@@ -57,4 +58,63 @@ if st.button('Predict Default Chances'):
     loss = result[0][0]
     win = result[0][1]
     st.header("Default Probability" + "- " + str(round(win * 100)) + "%")
+        # Plot for Probability Plot
+    with col1:
+        st.subheader('Probability Plot for Each Category')
+        predicted_probabilities = pipe.predict_proba(result)
+        classes = pipe.classes_
+
+        # Define colors for each category
+        colors = {'Standard': 'yellow', 'Poor': 'red', 'Good': 'green'}
+
+        # Create a pie chart
+        fig, ax = plt.subplots(figsize=(3, 3))
+        ax.pie(predicted_probabilities[0], labels=classes, autopct='%.0f%%', startangle=90, wedgeprops=dict(width=0.4, edgecolor='w'), colors=[colors[c] for c in classes])
+        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+        # Display the plot using Streamlit
+        st.pyplot(fig)
+
+    with col2:
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.subheader('Weightage of Each Feature')
+        
+        importance = pipe.named_steps['classifier'].feature_importances_            
+        preprocessor = pipe.named_steps['preprocessor']
+        
+        # Assuming the preprocessor has a 'get_feature_names_out' method
+        feature_names = preprocessor.get_feature_names_out()
+        
+        importance_df = pd.DataFrame({'Feature Importance': importance, 'Feature': feature_names})
+        importance_df = importance_df.sort_values(by='Feature Importance', ascending=True)
+
+        # Plotting the figure with vertical bar chart
+        plt.figure(figsize=(8, 6))
+
+        # Set a default color in case the number of features exceeds the number of custom colors
+        default_color = '#FFD700'
+        
+        # Ensure the number of colors matches the number of features
+        custom_colors = ['#FF6666', '#FF9933', '#99FF99', '#99CCFF', '#CC99FF', '#FFCC99', '#66FF99', '#FFD700', '#FF6347', '#8A2BE2'][:len(importance_df)]
+
+        # Create bars with different colors and add legends individually
+        for i, (feature, importance) in enumerate(zip(importance_df['Feature'], importance_df['Feature Importance'])):
+            color = custom_colors[i] if i < len(custom_colors) else default_color
+            bar = plt.bar(i, importance, color=color)
+            plt.text(i, importance, f'{importance:.2f}%', ha='center', va='bottom', color='black')
+
+        # Remove x labels
+        plt.xticks([])
+
+        # Create legends with different colors
+        legend_labels = importance_df['Feature']
+        legend_handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10) for color in custom_colors]
+        plt.legend(legend_handles, legend_labels, loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=2)
+
+        plt.grid(axis='y', linestyle='--', alpha=0.6)
+        sns.despine(right=True, top=True)
+
+        # Display the plot using Streamlit
+        st.pyplot()
+
  

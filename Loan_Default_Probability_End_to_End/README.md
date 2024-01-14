@@ -1,33 +1,68 @@
-# Loan Default Prediction with Random Forest
+# Loan Default Prediction with Streamlit
 
 ## Overview
 
-This machine learning project focuses on predicting the probability of loan default using a Random Forest model. The model is trained on a dataset containing information about applicants, including features such as Education, Loan Term, Credit Score, Income, Interest Rate, Loan Amount, Months Employed, Loan Purpose, and Employment Type
+This Streamlit application predicts the probability of loan default based on user-provided information such as education level, loan purpose, employment type, loan amount, loan term, credit score, monthly income, interest rate, and months employed. It uses a pre-trained machine learning model.
 
-https://github.com/bainskarman/projects/assets/122693789/6a52b5e0-67a0-4117-a8b0-a25e7ea0bf30 
+## Project Structure
 
-## Features
+- **loan_default_app.py**: Streamlit application script containing the main functionality.
+- **pipe.joblib**: Pre-trained machine learning model (serialized using joblib).
 
-- **Loan Default Prediction:** The project aims to predict the probability of loan default based on various features, including Education, Loan Term, Credit Score, Income, Interest Rate, Loan Amount, Months Employed, Loan Purpose, and Employment Type.
-- **Random Forest Model:** The core of the project involves training a Random Forest model to make predictions on the likelihood of loan default.
-- **Evaluation Metrics:** The project uses metrics such as accuracy, precision, recall, and F1-score to assess the performance of the Random Forest model.
-
-## Dataset
-
-- The dataset used for this project contains information about loan applicants, including the features mentioned above. The dataset can be found [here](link-to-dataset), and it is used for training and evaluating the machine learning model.
-
-## Getting Started
+## Installation and Usage
 
 ### Prerequisites
 
-- Python 3
-- Jupyter Notebook (optional for running the provided notebooks)
-- Required Python libraries (install using `pip install -r requirements.txt`)
+- Python 3.6 or later
+- Streamlit
+- pandas
+- numpy
+- joblib
+- scikit-learn
 
-### Installation
+### Setup
 
-1. Clone the repository:
+1. Clone the repository to your local machine:
 
-   ```bash
-   git clone https://github.com/bainskarman/projects
-   cd Loan_Default_Probability
+    ```bash
+    git clone https://github.com/bainskarman/projects.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd projects/Loan_Default_Probability
+    ```
+
+3. Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### Run the Application
+
+1. Execute the following command in the terminal:
+
+    ```bash
+    streamlit run loan_default_app.py
+    ```
+
+2. Open your web browser and go to the provided URL (typically http://localhost:8501).
+
+3. Use the application to input various parameters and predict the probability of loan default.
+
+## Streamlit App Structure
+
+The Streamlit application follows a structured flow:
+
+- **Input Section**: Users can select their highest education level, loan purpose, employment type, and input various financial parameters.
+
+- **Loan Default Prediction**: After clicking the "Predict Default Chances" button, the application uses the pre-trained model to predict the probability of loan default.
+
+- **Results Display**: The application then displays the predicted default probability.
+
+## Feedback and Issues
+
+If you encounter any issues or have suggestions for improvement, please [report them on GitHub](https://github.com/bainskarman/projects/issues).
+
