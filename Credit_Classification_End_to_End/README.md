@@ -3,7 +3,7 @@
 ## Overview
 
 This project utilizes machine learning to predict credit scores based on user-provided information. It's designed to evaluate the potential risk posed by lending money to consumers and to mitigate losses due to bad debt. The application is built using [Streamlit](https://www.streamlit.io/) and includes features such as profile selection, input sliders, and radio buttons to simulate user input.
-
+Visit This Link for Demo: [Credit Checker](https://creditchecker.streamlit.app/)
 ## Installation and Usage
 
 ### Prerequisites
