@@ -10,7 +10,7 @@ LoanPurpose= ['Other', 'Auto', 'Business' ,'Home' ,'Education']
 EmploymentType = ['Full-time' ,'Unemployed' ,'Self-employed' ,'Part-time']
  
 current_path = os.getcwd()
-path = os.path.join(current_path, 'Loan_Default_Probability/pipe.joblib')
+path = os.path.join(current_path, 'Loan_Default_Probability_End_to_End/pipe.joblib')
 pipe =joblib.load(path)
 st.title('Loan Default Prediction')
 
