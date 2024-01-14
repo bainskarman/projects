@@ -17,26 +17,12 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
                         'Report a bug': 'https://github.com/bainskarman/projects/issues',
                         'About': '''Enter the following information to get your credit score for previous 12 months or select a profile from the given options. This is a mock-up intended for information only, if you wish to learn more about the model behind this please go to the GitHub [Credit Analysis](github.com/bainskarman/projects/Credit_Classification_End_to_End)''' })
 
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
-
-# Load the model
 model_path = 'Apps/model.pkl'
 
 if os.path.exists(model_path):
     model = joblib.load(model_path)
 else:
-    logging.error(f"Error: Model file not found at {model_path}")
-
-# Log the value of 'output'
-logging.debug(f"Value of 'output': {output}")
-
-# Check if 'model' is defined before using it
-if 'model' in globals():
-    credit_score = model.predict(output)[0]
-else:
-    logging.error("Error: Model is not defined.")
+    print(f"Error: Model file not found at {model_path}")
 
 st.title('Credit Score Analysis')
 
