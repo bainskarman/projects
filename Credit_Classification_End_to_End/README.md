@@ -1,43 +1,64 @@
-# Credit History Classification Project
+# Credit Classification End-to-End ML Project
 
-This project focuses on the classification of credit history based on various features to determine creditworthiness. The goal is to assist in automating the credit approval process by predicting whether an individual is likely to have a good or bad credit history.
+## Overview
 
+This project utilizes machine learning to predict credit scores based on user-provided information. It's designed to evaluate the potential risk posed by lending money to consumers and to mitigate losses due to bad debt. The application is built using [Streamlit](https://www.streamlit.io/) and includes features such as profile selection, input sliders, and radio buttons to simulate user input.
 
-## Introduction
-
-Welcome to the Credit History Classification Project! This project utilizes a Random Forest classifier to predict creditworthiness based on various features related to an individual's financial history.
-
-https://github.com/bainskarman/projects/assets/122693789/d1670010-3fd2-4ef3-a076-6e5a0b3d3a06
-
-## Features
-
-The project uses the following features for credit history classification:
-
-- **Occupation**
-- **Monthly Inhand Salary**
-- **Number of Credit Cards**
-- **Number of Loans**
-- **Number of Delayed Payments**
-- **Outstanding Debt**
-- **Credit Utilization Ratio**
-- **Credit History Age**
-- **Credit Score**
-
-## Getting Started
-
-To get started with the project, follow the steps below.
+## Installation and Usage
 
 ### Prerequisites
 
-Ensure you have the following prerequisites installed:
+- Python 3.6 or later
+- Streamlit
+- pandas
+- seaborn
+- matplotlib
+- joblib
+- scikit-learn
 
-- Python 3.x
-- Pip (Python package installer)
+### Setup
 
-### Installation
+1. Clone the repository to your local machine:
 
-1. Clone the repository:
+    ```bash
+    git clone https://github.com/bainskarman/projects.git
+    ```
 
-   ```bash
-   git clone https://github.com/bainskarman/projects
-   cd credit_score
+2. Navigate to the project directory:
+
+    ```bash
+    cd projects/Credit_Classification_End_to_End
+    ```
+
+3. Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### Run the Application
+
+1. Execute the following command in the terminal:
+
+    ```bash
+    streamlit run Apps/newapp.py
+    ```
+
+2. Open your web browser and go to the provided URL (typically http://localhost:8501).
+
+3. Use the application to select a profile and input various parameters to predict and analyze credit scores.
+
+## Project Structure
+
+- **Apps/newapp.py**: Streamlit application script containing the main functionality.
+- **src/transform_resp.py**: Module for transforming user inputs.
+- **model.pkl**: Pre-trained machine learning model (serialized using joblib).
+- **requirements.txt**: List of project dependencies.
+
+## Credits
+
+This project was developed by Karman Singh with references from [Jaqueline Medeiros](https://github.com/devmedeiros).
+
+## Feedback and Issues
+
+If you encounter any issues or have suggestions for improvement, please [report them on GitHub](https://github.com/bainskarman/projects/issues).
