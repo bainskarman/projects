@@ -58,46 +58,4 @@ if st.button('Predict Default Chances'):
     loss = result[0][0]
     win = result[0][1]
     st.header("Default Probability" + "- " + str(round(win * 100)) + "%")
-
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.subheader('Weightage of Each Feature')
-    
-    importance = pipe.named_steps['classifier'].feature_importances_            
-    preprocessor = pipe.named_steps['preprocessor']
-    
-    # Assuming the preprocessor has a 'get_feature_names_out' method
-    feature_names = preprocessor.get_feature_names_out()
-    
-    importance_df = pd.DataFrame({'Feature Importance': importance, 'Feature': feature_names})
-    importance_df = importance_df.sort_values(by='Feature Importance', ascending=True)
-
-    # Plotting the figure with vertical bar chart
-    plt.figure(figsize=(8, 6))
-
-    # Set a default color in case the number of features exceeds the number of custom colors
-    default_color = '#FFD700'
-    
-    # Ensure the number of colors matches the number of features
-    custom_colors = ['#FF6666', '#FF9933', '#99FF99', '#99CCFF', '#CC99FF', '#FFCC99', '#66FF99', '#FFD700', '#FF6347', '#8A2BE2'][:len(importance_df)]
-
-    # Create bars with different colors and add legends individually
-    for i, (feature, importance) in enumerate(zip(importance_df['Feature'], importance_df['Feature Importance'])):
-        color = custom_colors[i] if i < len(custom_colors) else default_color
-        bar = plt.bar(i, importance, color=color)
-        plt.text(i, importance, f'{importance:.2f}%', ha='center', va='bottom', color='black')
-
-    # Remove x labels
-    plt.xticks([])
-
-        # Create legends with different colors
-        legend_labels = importance_df['Feature']
-        legend_handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10) for color in custom_colors]
-        plt.legend(legend_handles, legend_labels, loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=2)
-
-        plt.grid(axis='y', linestyle='--', alpha=0.6)
-        sns.despine(right=True, top=True)
-
-        # Display the plot using Streamlit
-        st.pyplot()
-
  
