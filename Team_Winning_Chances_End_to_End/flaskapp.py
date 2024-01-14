@@ -9,12 +9,12 @@ teams = ['Rajasthan Royals', 'Royal Challengers Bangalore', 'Sunrisers Hyderabad
 
 cities = ['Ahmedabad', 'Kolkata', 'Mumbai', 'Navi Mumbai', 'Pune', 'Dubai', 'Sharjah', 'Abu Dhabi', 'Delhi', 'Chennai', 'Hyderabad', 'Visakhapatnam', 'Chandigarh', 'Bengaluru', 'Jaipur', 'Indore', 'Bangalore', 'Raipur', 'Ranchi', 'Cuttack', 'Dharamsala', 'Nagpur', 'Johannesburg', 'Centurion', 'Durban', 'Bloemfontein', 'Port Elizabeth', 'Kimberley', 'East London', 'Cape Town']
 
-file_path = 'C:/Users/bains/Downloads/GitHub24/projects/Team_Winning_Chances_End_to_End/pipeline.pkl'
+file_path = '/workspaces/projects/Team_Winning_Chances_End_to_End/pipeline.pkl'
 with open(file_path, 'rb') as file:
     pipe = pickle.load(file)
 
 # Encode the image to base64
-with open('C:/Users/bains/Downloads/GitHub24/projects/Team_Winning_Chances_End_to_End/cricket-betting.jpg', 'rb') as image_file:
+with open('/workspaces/projects/Team_Winning_Chances_End_to_End/cricket-betting.jpg', 'rb') as image_file:
     encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
 
 def get_index_template():

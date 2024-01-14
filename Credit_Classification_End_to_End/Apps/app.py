@@ -27,7 +27,7 @@ behaviour = ['High_spent_Small_value_payments',
 
 category = ['Good', 'Standard', 'Poor']
 
-file_path='/workspaces/projects/credit_score/pipeline.joblib'
+file_path='/workspaces/projects/Credit_Classification_End_to_End/Models/pipeline.joblib'
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
