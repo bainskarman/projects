@@ -17,7 +17,7 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
                         'Report a bug': 'https://github.com/bainskarman/projects/issues',
                         'About': '''Enter the following information to get your credit score for previous 12 months or select a profile from the given options. This is a mock-up intended for information only, if you wish to learn more about the model behind this please go to the GitHub [Credit Analysis](github.com/bainskarman/projects/Credit_Classification_End_to_End)''' })
 app_dir = os.path.dirname(__file__)
-model_path = os.path.join(app_dir, 'model.pkl')
+model_path = os.path.join(app_dir, 'Credit_Classification_End_to_End/Apps/model.pkl')
 
 if os.path.exists(model_path):
     model = joblib.load(model_path)
