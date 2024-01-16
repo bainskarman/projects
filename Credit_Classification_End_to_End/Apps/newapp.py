@@ -25,7 +25,7 @@ with gzip.open(path, 'rb') as file:
 
 st.title('Credit Score Analysis')
 
-st.markdown('''Credit Industry uses credit scores to evaluate the potential risk posed by lending money to consumers and to mitigate losses due to bad debt. Credit scoring is not limited to banks. Other organizations, such as mobile phone companies, insurance companies, landlords, and government departments employ the same techniques. Credit scoring also has a lot of overlap with data mining, which uses many similar techniques. These techniques combine thousands of factors but are similar or identical. Hereby, I have used Machine Learning to predict the credit score of a person based on the information provided by them. ''')
+st.markdown('''Credit Industry uses credit scores to evaluate the potential risk posed by lending money to consumers and to mitigate losses due to bad debt. Credit scoring is not limited to banks. Other organizations, such as mobile phone companies, insurance companies, landlords, and government departments employ the same techniques. Credit scoring also has a lot of overlap with data mining, which uses many similar techniques. These techniques combine thousands of factors but are similar or identical. Hereby, I have used Machine Learning to predict the credit score of a person based on the information provided by them with model accuracy of ~80 percent on more than 100k records.  ''')
 age_default = None
 annual_income_default = 0.00
 accounts_default = 0
@@ -151,26 +151,45 @@ if run:
         # Display the interactive plot using Streamlit
         st.plotly_chart(fig)
 
+    # Custom feature names
+    custom_feature_names = {
+        'num__Age': 'Age',
+        'num__Annual_Income': 'Annual Income',
+        'num__Num_Bank_Accounts': 'Bank Accounts',
+        'num__Num_Credit_Card': 'Number of Credit Cards',
+        'num__Num_of_Delayed_Payment': 'Delayed Payments',
+        'num__Credit_Utilization_Ratio': 'Utilization Ratio',
+        'num__Total_EMI_per_month': 'Monthly EMI',
+        'num__Credit_History_Age_Formated': 'Months of Credit History',
+        'cat__Payment_of_Min_Amount_Yes_No': 'Min Payment if No',
+        'cat__Payment_of_Min_Amount_Yes_Yes': 'Min Payment if Yes'
+    }
+
     with col2:
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.subheader('Weightage of Each Feature')
         
         importance = model.named_steps['classifier'].feature_importances_            
-        preprocessor = model.named_steps['preprocessor']
         
-        # Assuming the preprocessor has a 'get_feature_names_out' method
-        feature_names = preprocessor.get_feature_names_out()
+        # Update feature names using the custom names
+        feature_names = [custom_feature_names.get(feature, feature) for feature in original_feature_names]
         
         importance_df = pd.DataFrame({'Feature Importance': importance, 'Feature': feature_names})
         importance_df = importance_df.sort_values(by='Feature Importance', ascending=True)
 
+        # Round the 'Feature Importance' column to 2 decimal places
+        importance_df['Feature Importance'] = importance_df['Feature Importance'].round(2)
+
         fig = px.bar(importance_df, x='Feature Importance', y='Feature',
-             text='Feature Importance', orientation='h', color='Feature Importance',
-             color_continuous_scale='Viridis', labels={'Feature Importance': 'Importance (%)'},
-             title='Feature Importance')
+                    text='Feature Importance', orientation='h', color='Feature Importance',
+                    color_continuous_scale='Viridis', labels={'Feature Importance': 'Importance (%)'},
+                    title='Feature Importance')
 
         # Adjust layout for better visualization
         fig.update_layout(yaxis=dict(autorange='reversed'), margin=dict(l=0, r=0, b=0, t=40))
+
+        # Customize hovertemplate to display percentage with 2 decimal places
+        fig.update_traces(hovertemplate='%{x:.2%} Importance')
 
         # Display the interactive plot using Streamlit
         st.plotly_chart(fig)
