@@ -83,23 +83,6 @@ Delving into Stock Forecasting, our project integrates LSTM, ANN, and Prophet mo
 This project focuses on data analysis using Microsoft SQL Server Management Studio (SSMS) and creating a comprehensive dashboard using Power BI. The analysis involves running SQL queries, saving query results, and leveraging the data to design and validate a Power BI dashboard.
 ![Sales Dash](https://github.com/bainskarman/projects/assets/122693789/91186766-5ea0-4226-bf03-47d53c9803a0)
 
-
-### 8. Alzheimer Detection with MRI Scans.
-This project focuses on utilizing Convolutional Neural Networks (CNNs) for the classification of brain MRI images to detect Alzheimer's disease. The dataset used for training and evaluation includes MRI scans from individuals with varying degrees of dementia.
-![Brain_MRI](https://github.com/bainskarman/projects/assets/122693789/cae118a9-abde-4ae5-bdb6-100b3f5d2741)
-
-![Accuracy](https://github.com/bainskarman/projects/assets/122693789/f6872abe-66a2-477f-8c6a-25f39726e072) ![Loss](https://github.com/bainskarman/projects/assets/122693789/06b6f7d6-329f-4e3a-b3e3-d38e879ccf5b)
-
-### 9. Youtube Analysis
-
-![Clusters](https://github.com/bainskarman/projects/assets/122693789/c8c86ebb-fcd6-434a-a05a-5cb324e718a2)
-
-### 9. Maintainance Prediction
-![LSTM](https://github.com/bainskarman/projects/assets/122693789/ea0fa1f2-0376-415d-8c9c-9f9203d17fbd)
-
-If you're interested in exploring a specific project, navigate to its respective folder for more details. Each project folder may contain its own README file with project-specific instructions, dependencies, and usage guidelines.
-
-
 ## Contact
 
 If you have any questions or want to get in touch, you can reach me at [bsinghkarman@gmail.com].
