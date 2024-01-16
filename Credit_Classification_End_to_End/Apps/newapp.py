@@ -129,17 +129,20 @@ if run:
         predicted_probabilities = model.predict_proba(output)
         classes = model.classes_
         colors = {'Standard': 'yellow', 'Poor': 'red', 'Good': 'green'}
-        df = pd.DataFrame({
-            'Category': classes,
+
+        # Create a DataFrame for Plotly Express
+        plotly_df = pd.DataFrame({
             'Probability': predicted_probabilities[0],
+            'Category': classes,
             'Color': [colors[c] for c in classes]
         })
 
-        # Create an interactive radar chart
-        fig = px.line_polar(df, r='Probability', theta='Category', line_close=True,
-                            line_shape='linear', color='Category', color_discrete_sequence=df['Color'],
-                            labels={'Probability': 'Probability (%)'},
-                            title='Probability Plot for Each Category')
+        # Create an interactive pie chart
+        fig = px.pie(plotly_df, values='Probability', names='Category',
+                    title='Probability Plot for Each Category',
+                    color='Category', color_discrete_map=colors,
+                    hole=0.4,  # Adjust the hole size for a doughnut chart effect
+                    labels={'Probability': 'Probability (%)'})
 
         # Adjust layout for better visualization
         fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
@@ -160,9 +163,6 @@ if run:
         
         importance_df = pd.DataFrame({'Feature Importance': importance, 'Feature': feature_names})
         importance_df = importance_df.sort_values(by='Feature Importance', ascending=True)
-
-        # Plotting the figure with vertical bar chart
-        plt.figure(figsize=(8, 6))
 
         fig = px.bar(importance_df, x='Feature Importance', y='Feature',
              text='Feature Importance', orientation='h', color='Feature Importance',
