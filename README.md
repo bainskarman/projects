@@ -16,6 +16,8 @@ Welcome to my portfolio of Data Science and Machine Learning projects! This repo
   - Install dependencies: `pip install -r requirements.txt`
   - Run the application: `streamlit run Apps/credit_score_app.py`
 
+https://github.com/bainskarman/projects/assets/122693789/fac6c839-3d59-4f67-b046-c4b631c658bf
+
 ### 2. Loan Default Prediction
 [Loan Risk Analysis App](https://loanriskanalysis.streamlit.app/)
 - **Description**: A Streamlit application for predicting the probability of loan default based on user-provided information such as education level, loan purpose, employment type, loan amount, loan term, credit score, monthly income, and interest rate.
