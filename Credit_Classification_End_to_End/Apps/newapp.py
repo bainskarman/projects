@@ -128,6 +128,7 @@ if run:
         st.subheader('Probability Plot for Each Category')
         predicted_probabilities = model.predict_proba(output)
         classes = model.classes_
+        colors = {'Standard': 'yellow', 'Poor': 'red', 'Good': 'green'}
         df = pd.DataFrame({
             'Category': classes,
             'Probability': predicted_probabilities[0],
