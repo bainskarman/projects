@@ -17,7 +17,6 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
                         'Get Help': None,
                         'Report a bug': 'https://github.com/bainskarman/projects/issues',
                         'About': '''Enter the following information to get your credit score for previous 12 months or select a profile from the given options. This is a mock-up intended for information only, if you wish to learn more about the model behind this please go to the GitHub [Credit Analysis](github.com/bainskarman/projects/Credit_Classification_End_to_End)''' })
-
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Credit_Classification_End_to_End/Apps/final_pipeline.pkl.gz')
 with gzip.open(path, 'rb') as file:
@@ -170,7 +169,12 @@ if run:
         st.subheader('Weightage of Each Feature')
         
         importance = model.named_steps['classifier'].feature_importances_            
-        
+        original_feature_names =['num__Age', 'num__Annual_Income', 'num__Num_Bank_Accounts',
+       'num__Num_Credit_Card', 'num__Num_of_Delayed_Payment',
+       'num__Credit_Utilization_Ratio', 'num__Total_EMI_per_month',
+       'num__Credit_History_Age_Formated',
+       'cat__Payment_of_Min_Amount_Yes_No',
+       'cat__Payment_of_Min_Amount_Yes_Yes']
         # Update feature names using the custom names
         feature_names = [custom_feature_names.get(feature, feature) for feature in original_feature_names]
         
