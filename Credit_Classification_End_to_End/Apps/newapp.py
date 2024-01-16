@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 import joblib
 import warnings
 from sklearn.exceptions import ConvergenceWarning
-
+import gzip
+import plotly.express as px
 warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
 
 st.set_page_config(page_title='Credit Classification', layout='wide',initial_sidebar_state='auto', menu_items={
@@ -19,7 +20,8 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
 
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Credit_Classification_End_to_End/Apps/model.pkl')
-model =joblib.load(path)
+with gzip.open(path, 'rb') as file:
+    model = pickle.load(file)
 
 st.title('Credit Score Analysis')
 
@@ -126,17 +128,24 @@ if run:
         st.subheader('Probability Plot for Each Category')
         predicted_probabilities = model.predict_proba(output)
         classes = model.classes_
+        df = pd.DataFrame({
+            'Category': classes,
+            'Probability': predicted_probabilities[0],
+            'Color': [colors[c] for c in classes]
+        })
 
-        # Define colors for each category
-        colors = {'Standard': 'yellow', 'Poor': 'red', 'Good': 'green'}
+        # Create an interactive radar chart
+        fig = px.line_polar(df, r='Probability', theta='Category', line_close=True,
+                            line_shape='linear', color='Category', color_discrete_sequence=df['Color'],
+                            labels={'Probability': 'Probability (%)'},
+                            title='Probability Plot for Each Category')
 
-        # Create a pie chart
-        fig, ax = plt.subplots(figsize=(3, 3))
-        ax.pie(predicted_probabilities[0], labels=classes, autopct='%.0f%%', startangle=90, wedgeprops=dict(width=0.4, edgecolor='w'), colors=[colors[c] for c in classes])
-        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+        # Adjust layout for better visualization
+        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+                        showlegend=False, margin=dict(l=0, r=0, b=0, t=40))
 
-        # Display the plot using Streamlit
-        st.pyplot(fig)
+        # Display the interactive plot using Streamlit
+        st.plotly_chart(fig)
 
     with col2:
         st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -154,30 +163,13 @@ if run:
         # Plotting the figure with vertical bar chart
         plt.figure(figsize=(8, 6))
 
-        # Set a default color in case the number of features exceeds the number of custom colors
-        default_color = '#FFD700'
-        
-        # Ensure the number of colors matches the number of features
-        custom_colors = ['#FF6666', '#FF9933', '#99FF99', '#99CCFF', '#CC99FF', '#FFCC99', '#66FF99', '#FFD700', '#FF6347', '#8A2BE2'][:len(importance_df)]
+        fig = px.bar(importance_df, x='Feature Importance', y='Feature',
+             text='Feature Importance', orientation='h', color='Feature Importance',
+             color_continuous_scale='Viridis', labels={'Feature Importance': 'Importance (%)'},
+             title='Feature Importance')
 
-        # Create bars with different colors and add legends individually
-        for i, (feature, importance) in enumerate(zip(importance_df['Feature'], importance_df['Feature Importance'])):
-            color = custom_colors[i] if i < len(custom_colors) else default_color
-            bar = plt.bar(i, importance, color=color)
-            plt.text(i, importance, f'{importance:.2f}%', ha='center', va='bottom', color='black')
+        # Adjust layout for better visualization
+        fig.update_layout(yaxis=dict(autorange='reversed'), margin=dict(l=0, r=0, b=0, t=40))
 
-        # Remove x labels
-        plt.xticks([])
-
-        # Create legends with different colors
-        legend_labels = importance_df['Feature']
-        legend_handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10) for color in custom_colors]
-        plt.legend(legend_handles, legend_labels, loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=2)
-
-        plt.grid(axis='y', linestyle='--', alpha=0.6)
-        sns.despine(right=True, top=True)
-
-        # Display the plot using Streamlit
-        st.pyplot()
-
-
+        # Display the interactive plot using Streamlit
+        st.plotly_chart(fig)
