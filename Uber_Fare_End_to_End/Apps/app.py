@@ -2,45 +2,30 @@ import streamlit as st
 import joblib
 import os
 import pandas as pd
-from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
 from datetime import datetime
 from geopy.distance import geodesic
-from geopy.geocoders import Nominatim
+from geopy.geocoders import OpenCage
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Uber_Fare_End_to_End/Apps/pipeline.joblib')
 pipeline = joblib.load(path)
 
 st.title('Ride Fare Estimation')
 
-
-def get_coordinates(location):
-    geolocator = Nominatim(user_agent="location_converter")
-
-    # Retry parameters
-    max_retries = 3
-    retries = 0
-
-    while retries < max_retries:
-        try:
-            location_data = geolocator.geocode(location)
-            if location_data:
-                return location_data.latitude, location_data.longitude
-            else:
-                print("Geocoding failed.")
-                return None
-        except GeocoderUnavailable as e:
-            print(f"Geocoding service unavailable. Retrying ({retries + 1}/{max_retries})...")
-            retries += 1
-            time.sleep(2)  # Adjust the delay as needed
-
-    print(f"Maximum retries reached. Geocoding failed.")
-    return None
+key ='23db542af7ac47b7a62c8f0f91fbfc4a'
+def get_coordinates(location, api_key):
+    geolocator = OpenCage(api_key)
+    location_data = geolocator.geocode(location)
+    
+    if location_data:
+        return location_data.latitude, location_data.longitude
+    else:
+        return None
 
 pickup_location = st.text_input('Enter Pickup Location')
 dropoff_location = st.text_input('Enter Drop Off Location')
-pickup_coordinates =get_coordinates(pickup_location)
-dropoff_coordinates=get_coordinates(dropoff_location)
+pickup_coordinates =get_coordinates(pickup_location,key)
+dropoff_coordinates=get_coordinates(dropoff_location,key)
 distance = geodesic(pickup_coordinates, dropoff_coordinates).kilometers
 passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
 
