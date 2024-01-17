@@ -1,5 +1,4 @@
 joblib
-os
 geopy
 datetime
 streamlit
