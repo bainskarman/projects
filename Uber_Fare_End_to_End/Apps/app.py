@@ -9,7 +9,7 @@ from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Uber_Fare_End_to_End/Apps/pipeline.joblib')
-pipeline = joblib.load(file)
+pipeline = joblib.load(path)
 
 st.title('Ride Fare Estimation')
 
