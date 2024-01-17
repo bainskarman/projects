@@ -14,14 +14,28 @@ pipeline = joblib.load(path)
 st.title('Ride Fare Estimation')
 
 
-# Function to convert location to coordinates
 def get_coordinates(location):
     geolocator = Nominatim(user_agent="location_converter")
-    location_data = geolocator.geocode(location)
-    if location_data:
-        return location_data.latitude, location_data.longitude
-    else:
-        return None
+
+    # Retry parameters
+    max_retries = 3
+    retries = 0
+
+    while retries < max_retries:
+        try:
+            location_data = geolocator.geocode(location)
+            if location_data:
+                return location_data.latitude, location_data.longitude
+            else:
+                print("Geocoding failed.")
+                return None
+        except GeocoderUnavailable as e:
+            print(f"Geocoding service unavailable. Retrying ({retries + 1}/{max_retries})...")
+            retries += 1
+            time.sleep(2)  # Adjust the delay as needed
+
+    print(f"Maximum retries reached. Geocoding failed.")
+    return None
 
 pickup_location = st.text_input('Enter Pickup Location')
 dropoff_location = st.text_input('Enter Drop Off Location')
