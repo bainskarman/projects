@@ -61,7 +61,7 @@ https://github.com/bainskarman/projects/assets/122693789/fa0793db-af29-4dc0-b4fd
   - Install dependencies: `pip install -r requirements.txt`
   - Run the application: `streamlit run app.py`
 
-![Report](https://github.com/bainskarman/projects/assets/122693789/a38edcf1-22cd-4e0b-8886-4aebbd5f59f1)
+https://github.com/bainskarman/projects/assets/122693789/a38edcf1-22cd-4e0b-8886-4aebbd5f59f1
 
 ### 5. Uber Fare Estimation
 Vist Application: [WEB APP](https://ubercostestimation.streamlit.app/)
@@ -76,22 +76,22 @@ Vist Application: [WEB APP](https://ubercostestimation.streamlit.app/)
   - Run the application: `streamlit run app.py`
   - Access the application in your web browser at http://localhost:8501
 
-  [Demo](https://github.com/bainskarman/projects/assets/122693789/3b32f7fc-52f1-4a7c-9ff1-2e2f563f29e4)
+https://github.com/bainskarman/projects/assets/122693789/3b32f7fc-52f1-4a7c-9ff1-2e2f563f29e4
   
 ### 6. Stocks Forcasting with LSTM and Prophet
 Delving into Stock Forecasting, our project integrates LSTM, ANN, and Prophet models. By harnessing historical stock data, we aim to predict future trends, enabling insightful investment decisions through advanced time-series analysis.
 
-![prophet]([text](https://github.com/bainskarman/projects/assets/122693789/4b77dbf8-a5fc-4cfd-867f-3832373c784f))
+[Prophet](https://github.com/bainskarman/projects/assets/122693789/4b77dbf8-a5fc-4cfd-867f-3832373c784f)
 
 ### 7. Sales Analysis with SQL and Power BI.
 This project focuses on data analysis using Microsoft SQL Server Management Studio (SSMS) and creating a comprehensive dashboard using Power BI. The analysis involves running SQL queries, saving query results, and leveraging the data to design and validate a Power BI dashboard.
 
-![Sales Dash](https://github.com/bainskarman/projects/assets/122693789/edcdf20f-40c9-495e-9ea4-762372562d92)
+[Dash](https://github.com/bainskarman/projects/assets/122693789/edcdf20f-40c9-495e-9ea4-762372562d92)
 
 ### 7. Survey Data Dashboard with Power BI.
 Surveys are a valuable tool for collecting information and feedback, but interpreting large datasets can be challenging. The Survey Data Dashboard addresses this challenge by utilizing Power BI, a robust business intelligence platform, to transform raw survey data into visually compelling and interactive dashboards.
 
-[Dashborad on Streamlit](https://github.com/bainskarman/projects/assets/122693789/66d92832-228c-4fbe-86a3-1f14139c3e9f)
+https://github.com/bainskarman/projects/assets/122693789/66d92832-228c-4fbe-86a3-1f14139c3e9f
 ## Contact
 
 If you have any questions or want to get in touch, you can reach me at [bsinghkarman@gmail.com].
