@@ -6,6 +6,7 @@ from geopy.exc import GeocoderTimedOut
 from datetime import datetime
 from geopy.distance import geodesic
 from geopy.geocoders import OpenCage
+import plotly.express as px
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Uber_Fare_End_to_End/Apps/pipeline.joblib')
 pipeline = joblib.load(path)
@@ -13,13 +14,20 @@ pipeline = joblib.load(path)
 st.title('Ride Fare Estimation')
 
 key ='23db542af7ac47b7a62c8f0f91fbfc4a'
+from geopy.exc import GeocoderTimedOut, GeocoderServiceError, GeocoderQueryError
+
 def get_coordinates(location, api_key):
     geolocator = OpenCage(api_key)
-    location_data = geolocator.geocode(location)
     
-    if location_data:
-        return location_data.latitude, location_data.longitude
-    else:
+    try:
+        location_data = geolocator.geocode(location)
+        if location_data:
+            return location_data.latitude, location_data.longitude
+        else:
+            print(f"Location data not found for {location}")
+            return None
+    except (GeocoderTimedOut, GeocoderServiceError, GeocoderQueryError) as e:
+        print(f"Geocoding error: {e}")
         return None
 
 pickup_location = st.text_input('Enter Pickup Location')
@@ -60,3 +68,32 @@ if st.button('Predict Fare'):
         st.write(f"${fare_prediction[0]:.2f}")
     else:
         st.warning("Please enter valid pickup and dropoff location names.")
+
+current_path = os.getcwd()
+path = os.path.join(current_path, 'Uber_Fare_End_to_End/Data/uber.csv')
+df = pd.read_csv(path)
+
+# Calculate the average fare for each pickup location
+avg_fare_pickup = df.groupby(['pickup_latitude', 'pickup_longitude'])['fare_amount'].mean().reset_index()
+
+# Create a Streamlit app
+st.title('Average Fare Price Heatmaps')
+
+# Display pickup location heatmap
+st.subheader('Pickup Location Heatmap')
+fig_pickup = px.density_mapbox(avg_fare_pickup,
+                               lat='pickup_latitude',
+                               lon='pickup_longitude',
+                               z='fare_amount',
+                               radius=10,
+                               center=dict(lat=40.7128, lon=-74.0060),  # Center around New York
+                               zoom=10,
+                               mapbox_style='carto-positron',
+                               opacity=0.6,
+                               title='Average Fare Price Heatmap - Pickup Locations')
+
+# Update the layout to add mapbox access token (replace 'your_mapbox_token' with your actual Mapbox token)
+fig_pickup.update_layout(mapbox=dict(accesstoken='your_mapbox_token'))
+
+# Display both plots in two columns
+st.plotly_chart(fig_pickup, use_container_width=True)
