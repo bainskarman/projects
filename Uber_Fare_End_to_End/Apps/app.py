@@ -7,6 +7,7 @@ from datetime import datetime
 from geopy.distance import geodesic
 from geopy.geocoders import OpenCage
 import plotly.express as px
+import sklearn
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Uber_Fare_End_to_End/Apps/pipeline.joblib')
 pipeline = joblib.load(path)
