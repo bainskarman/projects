@@ -81,12 +81,12 @@ https://github.com/bainskarman/projects/assets/122693789/3b32f7fc-52f1-4a7c-9ff1
 ### 6. Stocks Forcasting with LSTM and Prophet
 Delving into Stock Forecasting, our project integrates LSTM, ANN, and Prophet models. By harnessing historical stock data, we aim to predict future trends, enabling insightful investment decisions through advanced time-series analysis.
 
-https://github.com/bainskarman/projects/assets/122693789/4b77dbf8-a5fc-4cfd-867f-3832373c784f
+[Prophet](https://github.com/bainskarman/projects/assets/122693789/4b77dbf8-a5fc-4cfd-867f-3832373c784f)
 
 ### 7. Sales Analysis with SQL and Power BI.
 This project focuses on data analysis using Microsoft SQL Server Management Studio (SSMS) and creating a comprehensive dashboard using Power BI. The analysis involves running SQL queries, saving query results, and leveraging the data to design and validate a Power BI dashboard.
 
-https://github.com/bainskarman/projects/assets/122693789/edcdf20f-40c9-495e-9ea4-762372562d92
+[Dash](https://github.com/bainskarman/projects/assets/122693789/edcdf20f-40c9-495e-9ea4-762372562d92)
 
 ### 7. Survey Data Dashboard with Power BI.
 Surveys are a valuable tool for collecting information and feedback, but interpreting large datasets can be challenging. The Survey Data Dashboard addresses this challenge by utilizing Power BI, a robust business intelligence platform, to transform raw survey data into visually compelling and interactive dashboards.
