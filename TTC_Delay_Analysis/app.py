@@ -7,7 +7,11 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 from prophet import Prophet
-df = pd.read_csv('/workspaces/projects/TTC_Delay_Analysis/Data/data.csv')
+import os
+from streamlit.components.v1 import html
+current_path = os.getcwd()
+path = os.path.join(current_path, 'TTC_Delay_Analysis/data.csv')
+df = pd.read_csv(path)
 
 # Streamlit App
 st.title("TTC Delays Analysis Report")
@@ -123,6 +127,72 @@ st.plotly_chart(plot_avg_min_delay(df_2022, df_2023))
 m = Prophet(seasonality_mode='multiplicative', yearly_seasonality=True, weekly_seasonality=True)
 m.add_seasonality(name='monthly', period=30.44, fourier_order=5)  # Adjust period based on your data
 m.fit(df)
+
+st.subheader("Tableau Reports")
+def tableau_component():
+    # Tableau HTML code
+    tableau_html_code = """
+    <div class='tableauPlaceholder' id='viz1705566063091' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TTCDelayDash&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1705566063091');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 800) {
+            vizElement.style.minWidth='420px';
+            vizElement.style.maxWidth='650px';
+            vizElement.style.width='100%';
+            vizElement.style.minHeight='587px';
+            vizElement.style.maxHeight='887px';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else if (divElement.offsetWidth > 500) {
+            vizElement.style.minWidth='420px';
+            vizElement.style.maxWidth='650px';
+            vizElement.style.width='100%';
+            vizElement.style.minHeight='587px';
+            vizElement.style.maxHeight='887px';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else {
+            vizElement.style.width='100%';
+            vizElement.style.height='877px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+    """
+    return html(tableau_html_code, height=887, width=950, scrolling=True)
+tableau_component()
+def tableau_component2():
+    # Tableau HTML code
+    tableau_html_code = """
+    <div class='tableauPlaceholder' id='viz1705573145388' style='position: relative'><noscript><a href='#'><img alt='Dashboard 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash2&#47;Dashboard2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TTCDelayDash2&#47;Dashboard2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash2&#47;Dashboard2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1705573145388');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 800) {
+            vizElement.style.minWidth='520px';
+            vizElement.style.maxWidth='920px';
+            vizElement.style.width='100%';
+            vizElement.style.minHeight='587px';
+            vizElement.style.maxHeight='887px';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else if (divElement.offsetWidth > 500) {
+            vizElement.style.minWidth='520px';
+            vizElement.style.maxWidth='920px';
+            vizElement.style.width='100%';
+            vizElement.style.minHeight='587px';
+            vizElement.style.maxHeight='887px';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        } else {
+            vizElement.style.width='100%';
+            vizElement.style.height='777px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+    """
+    return html(tableau_html_code, height=887, width=950, scrolling=True)
+tableau_component2()
 
 # Streamlit App
 st.title("Delay Forecast with Prophet")
