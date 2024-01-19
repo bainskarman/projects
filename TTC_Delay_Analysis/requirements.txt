@@ -6,3 +6,5 @@ plotly
 seaborn
 scikit-learn
 prophet
+joblib
+pickle
