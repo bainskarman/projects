@@ -62,7 +62,7 @@ if pickup_coordinates and dropoff_coordinates:
     except ValueError as e:
         st.error(str(e))
 
-passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
+passenger_count = 2
 
 if st.button('Predict Fare'):
     if pickup_coordinates and dropoff_coordinates:
