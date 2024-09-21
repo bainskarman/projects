@@ -165,7 +165,6 @@ if run:
     }
 
     with col2:
-        st.set_option('deprecation.showPyplotGlobalUse', False)
         st.subheader('Weightage of Each Feature')
         
         importance = model.named_steps['classifier'].feature_importances_            
