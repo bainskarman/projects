@@ -31,9 +31,21 @@ def get_coordinates(location, api_key):
         print(f"Geocoding error: {e}")
         return None
 
-pickup_coordinates = st.text_input('Enter Pickup Location')
-dropoff_coordinates = st.text_input('Enter Drop Off Location')
-distance = geodesic(pickup_coordinates, dropoff_coordinates).kilometers
+# Get pickup and dropoff coordinates from user input
+pickup_coordinates = st.text_input('Enter Pickup Location (format: (lat, lon))')
+dropoff_coordinates = st.text_input('Enter Drop Off Location (format: (lat, lon))')
+
+if pickup_coordinates and dropoff_coordinates:
+    try:
+        # Convert input strings to tuples
+        pickup_coords = eval(pickup_coordinates)
+        dropoff_coords = eval(dropoff_coordinates)
+
+        # Calculate distance
+        distance = geodesic(pickup_coords, dropoff_coords).kilometers
+        st.write(f'Distance: {distance:.2f} km')
+    except (SyntaxError, ValueError):
+        st.error('Please enter coordinates in the correct format: (latitude, longitude)')
 passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
 
 if st.button('Predict Fare'):
