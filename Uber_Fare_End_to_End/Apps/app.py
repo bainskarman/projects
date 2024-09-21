@@ -31,21 +31,40 @@ def get_coordinates(location, api_key):
         print(f"Geocoding error: {e}")
         return None
 
-# Get pickup and dropoff coordinates from user input
-pickup_coordinates = st.text_input('Enter Pickup Location (format: (lat, lon))')
-dropoff_coordinates = st.text_input('Enter Drop Off Location (format: (lat, lon))')
+import streamlit as st
+from geopy.distance import geodesic
+
+def parse_coordinates(coord_str):
+    try:
+        # Split by lines and parse each line
+        coords = [tuple(map(float, line.strip('()').split(','))) for line in coord_str.strip().splitlines()]
+        return coords
+    except ValueError:
+        raise ValueError("Invalid format. Please use (latitude, longitude) for each location.")
+
+# Get multiple pickup and dropoff coordinates from user input
+pickup_coordinates = st.text_area('Enter Pickup Locations (format: (lat, lon), one per line)')
+dropoff_coordinates = st.text_area('Enter Drop Off Locations (format: (lat, lon), one per line)')
 
 if pickup_coordinates and dropoff_coordinates:
     try:
-        # Convert input strings to tuples
-        pickup_coords = eval(pickup_coordinates)
-        dropoff_coords = eval(dropoff_coordinates)
+        # Parse input strings into lists of tuples
+        pickup_coords = parse_coordinates(pickup_coordinates)
+        dropoff_coords = parse_coordinates(dropoff_coordinates)
 
-        # Calculate distance
-        distance = geodesic(pickup_coords, dropoff_coords).kilometers
-        st.write(f'Distance: {distance:.2f} km')
-    except (SyntaxError, ValueError):
-        st.error('Please enter coordinates in the correct format: (latitude, longitude)')
+        # Calculate distances for each pair of pickup and dropoff locations
+        distances = []
+        for pickup in pickup_coords:
+            for dropoff in dropoff_coords:
+                distance = geodesic(pickup, dropoff).kilometers
+                distances.append(distance)
+
+        st.write("Distances (in km):")
+        for distance in distances:
+            st.write(f'{distance:.2f} km')
+
+    except ValueError as e:
+        st.error(str(e))
 passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
 
 if st.button('Predict Fare'):
