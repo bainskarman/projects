@@ -31,10 +31,8 @@ def get_coordinates(location, api_key):
         print(f"Geocoding error: {e}")
         return None
 
-pickup_location = st.text_input('Enter Pickup Location')
-dropoff_location = st.text_input('Enter Drop Off Location')
-pickup_coordinates =get_coordinates(pickup_location,key)
-dropoff_coordinates=get_coordinates(dropoff_location,key)
+pickup_coordinates = st.text_input('Enter Pickup Location')
+dropoff_coordinates = st.text_input('Enter Drop Off Location')
 distance = geodesic(pickup_coordinates, dropoff_coordinates).kilometers
 passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
 
