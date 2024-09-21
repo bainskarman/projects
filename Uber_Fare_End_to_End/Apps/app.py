@@ -30,13 +30,9 @@ def get_coordinates(location, api_key):
     except (GeocoderTimedOut, GeocoderServiceError, GeocoderQueryError) as e:
         print(f"Geocoding error: {e}")
         return None
-
-import streamlit as st
-from geopy.distance import geodesic
-
 def parse_coordinates(coord_str):
     try:
-        # Split by lines and parse each line
+        # Split by lines and parse each line into a tuple
         coords = [tuple(map(float, line.strip('()').split(','))) for line in coord_str.strip().splitlines()]
         return coords
     except ValueError:
@@ -65,6 +61,7 @@ if pickup_coordinates and dropoff_coordinates:
 
     except ValueError as e:
         st.error(str(e))
+
 passenger_count = st.number_input('Enter Passenger Count:', min_value=1, value=1)
 
 if st.button('Predict Fare'):
