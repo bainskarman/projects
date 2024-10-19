@@ -14,6 +14,7 @@ Features
 - Supports over 2000 unique categories
 - User-friendly interface hosted on Hugging Face
 To get started with the Wiqi 3 Level Classification, you can either use the hosted app or run the code locally.
+
 https://github.com/user-attachments/assets/7ee1866c-b6d6-49d3-ba82-e93d70974908
 
 
