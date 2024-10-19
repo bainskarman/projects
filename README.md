@@ -4,23 +4,18 @@ Welcome to my portfolio of Data Science and Machine Learning projects! This repo
 
 ## Project List
 ### Wiqi 3 Level Classification
-[Article Classification App](https://github.com/user-attachments/assets/7ee1866c-b6d6-49d3-ba82-e93d70974908)
+[Wiqi 3 Level Classification](https://huggingface.co/spaces/bainskarman/WiqiClassification)
+
 Wiqi 3 Level Classification is a powerful tool designed to classify Wikipedia articles into up to three different categories. With an impressive accuracy rate of 88% and support for over 2000 unique categories, this project aims to enhance the organization and retrieval of information from Wikipedia.
 
-### Features
-
+Features
 - Classifies Wikipedia articles into up to three categories
 - Achieves 88% classification accuracy
 - Supports over 2000 unique categories
 - User-friendly interface hosted on Hugging Face
-
-### Getting Started
-
 To get started with the Wiqi 3 Level Classification, you can either use the hosted app or run the code locally.
+https://github.com/user-attachments/assets/7ee1866c-b6d6-49d3-ba82-e93d70974908
 
-### Hosted App
-
-You can access the hosted app here: [Wiqi 3 Level Classification](https://huggingface.co/spaces/bainskarman/WiqiClassification).
 
 ### Credit Score Analysis
 [Credit Check App](https://creditchecker.streamlit.app/)
