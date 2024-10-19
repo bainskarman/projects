@@ -72,8 +72,8 @@ def main():
     if st.button("Classify"):
         if user_input:
             # Classify input text
-            result = 'Yes it Works'
-            st.success(f"Predicted Class: {result}")
+           main_category, sub_category, lowest_category = classify_text(user_input)
+           st.success(f"Main Category: {main_category}, Sub Category: {sub_category}, Lowest Category: {lowest_category}")
         else:
             st.warning("Please enter some text.")
 
