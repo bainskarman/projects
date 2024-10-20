@@ -3,7 +3,41 @@
 Welcome to my portfolio of Data Science and Machine Learning projects! This repository contains various applications and models developed for different purposes. Below, you'll find a brief overview of each project along with instructions for installation and usage.
 
 ## Project List
+
+### ATS Scanner
+
+[Hugging Face Spaces - ATS Scanner](https://huggingface.co/spaces/bainskarman/ATSScanner)
+
+
+Welcome to the **ATS Scanner**! This application evaluates your resume and provides an ATS (Applicant Tracking System) score, along with actionable feedback to improve your chances of getting noticed by recruiters.
+
+Overview
+
+The ATS Scanner utilizes advanced natural language processing models to analyze your resume content. It shortens your ATS score using the `paraphrase-MiniLM-L6-v2` model and generates a detailed review using the `nvidia/llama-3.1-nemotron-70b-instruct` model. The app highlights areas for improvement and what aspects of your resume are strong.
+
+Features
+
+- ATS Score Assessment: Receive a concise ATS score based on your resume content.
+- Detailed Feedback: Get a comprehensive review of your resume, including:
+- Strengths to emphasize
+- Areas needing improvement
+- Tips for optimization
+
+How to Use
+
+1. Input Your Resume: Upload your resume document or paste the text directly into the provided field.
+2. Generate ATS Score: Click the button to analyze your resume.
+3. Review Feedback: Examine the generated ATS score and feedback to understand how to enhance your resume.
+
+Technologies Used
+
+- paraphrase-MiniLM-L6-v2: For scoring the ATS effectiveness of your resume.
+- nvidia/llama-3.1-nemotron-70b-instruct: For generating detailed, actionable feedback on your resume.
+
+
+
 ### Wiqi 3 Level Classification
+
 [Wiqi 3 Level Classification](https://huggingface.co/spaces/bainskarman/WiqiClassification)
 
 Wiqi 3 Level Classification is a powerful tool designed to classify Wikipedia articles into up to three different categories. With an impressive accuracy rate of 88% and support for over 2000 unique categories, this project aims to enhance the organization and retrieval of information from Wikipedia.
