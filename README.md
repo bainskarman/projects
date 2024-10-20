@@ -34,7 +34,7 @@ Technologies Used
 - paraphrase-MiniLM-L6-v2: For scoring the ATS effectiveness of your resume.
 - nvidia/llama-3.1-nemotron-70b-instruct: For generating detailed, actionable feedback on your resume.
 
-
+https://github.com/user-attachments/assets/c6ce0ad1-51ff-4cbd-bc7e-362b4cc5cf1f
 
 ### Wiqi 3 Level Classification
 
@@ -49,7 +49,9 @@ Features
 - User-friendly interface hosted on Hugging Face
 To get started with the Wiqi 3 Level Classification, you can either use the hosted app or run the code locally.
 
-https://github.com/user-attachments/assets/7ee1866c-b6d6-49d3-ba82-e93d70974908
+
+[Watch the Video](https://github.com/user-attachments/assets/c6ce0ad1-51ff-4cbd-bc7e-362b4cc5cf1f)
+
 
 
 ### Credit Score Analysis
@@ -64,7 +66,7 @@ https://github.com/user-attachments/assets/7ee1866c-b6d6-49d3-ba82-e93d70974908
   - Install dependencies: `pip install -r requirements.txt`
   - Run the application: `streamlit run Apps/credit_score_app.py`
 
-https://github.com/bainskarman/projects/assets/122693789/fac6c839-3d59-4f67-b046-c4b631c658bf
+https://github.com/user-attachments/assets/384eaed3-f3d5-4ef0-b37e-16bed7e3de37
 
 ### Loan Default Prediction
 [Loan Risk Analysis App](https://loanriskanalysis.streamlit.app/)
