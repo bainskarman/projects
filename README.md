@@ -50,7 +50,7 @@ Features
 To get started with the Wiqi 3 Level Classification, you can either use the hosted app or run the code locally.
 
 
-[Watch the Video](https://github.com/user-attachments/assets/c6ce0ad1-51ff-4cbd-bc7e-362b4cc5cf1f)
+[Watch the Video](https://github.com/user-attachments/assets/384eaed3-f3d5-4ef0-b37e-16bed7e3de37)
 
 
 
@@ -66,7 +66,7 @@ To get started with the Wiqi 3 Level Classification, you can either use the host
   - Install dependencies: `pip install -r requirements.txt`
   - Run the application: `streamlit run Apps/credit_score_app.py`
 
-https://github.com/user-attachments/assets/384eaed3-f3d5-4ef0-b37e-16bed7e3de37
+https://github.com/user-attachments/assets/45099e3a-c1d7-48fe-ac27-a7154025cec9
 
 ### Loan Default Prediction
 [Loan Risk Analysis App](https://loanriskanalysis.streamlit.app/)
