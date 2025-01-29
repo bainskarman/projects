@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
-
+import os
 teams = ['Rajasthan Royals',
     'Royal Challengers Bangalore',
     'Sunrisers Hyderabad',
@@ -43,8 +43,7 @@ cities = ['Ahmedabad',
     'Kimberley',
     'East London',
     'Cape Town']
-
-file_path='/workspaces/projects/Team_Winning_Chances_End_to_End/Apps/pipeline.pkl'
+file_path = os.path.join(os.path.dirname(__file__), 'pipeline.pkl')
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
