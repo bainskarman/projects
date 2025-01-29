@@ -43,7 +43,7 @@ cities = ['Ahmedabad',
     'Kimberley',
     'East London',
     'Cape Town']
-file_path = os.path.join(os.path.dirname(__file__), 'pipeline.pkl')
+file_path = os.path.join(os.path.dirname(__file__), 'my_pipeline.joblib')
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
