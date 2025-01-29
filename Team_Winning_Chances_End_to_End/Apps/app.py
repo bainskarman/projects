@@ -43,10 +43,10 @@ cities = ['Ahmedabad',
     'Kimberley',
     'East London',
     'Cape Town']
-file_path = os.path.join(os.path.dirname(__file__), 'my_pipeline.joblib')
+file_path = os.path.join(os.path.dirname(__file__), 'pipeline.pkl')
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
-
+print(pipe)
 st.title('Winner Predictor for IPL')
 
 # Using st.columns instead of st.beta_columns
