@@ -44,7 +44,7 @@ cities = ['Ahmedabad',
     'East London',
     'Cape Town']
 
-file_path='pipeline.pkl'
+file_path='/workspaces/projects/Team_Winning_Chances_End_to_End/Apps/pipeline.pkl'
 with open(file_path, 'rb') as file:
     pipe = joblib.load(file)
 
