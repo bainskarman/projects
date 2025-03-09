@@ -4,9 +4,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import numpy as np
 from prophet import Prophet
+from ta.trend import ADXIndicator  # For ADX calculation
 import os
 from streamlit.components.v1 import html
 
@@ -14,6 +14,10 @@ from streamlit.components.v1 import html
 current_path = os.getcwd()
 path = os.path.join(current_path, 'TTC_Delay_Analysis/data.csv')
 df = pd.read_csv(path)
+
+# Convert 'Date' column to datetime and set as index
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
 
 # Set page config
 st.set_page_config(layout='wide', page_title="TTC Delays Analysis Report", page_icon="🚌")
@@ -196,11 +200,11 @@ st.markdown("""
 
 # Section 5: Forecasting with Prophet
 st.header("🔮 Delay Forecast with Prophet")
-df = df[['Date', 'Min Delay']]
-df.columns = ['ds', 'y']
+df_prophet = df[['Min Delay']].reset_index()
+df_prophet.columns = ['ds', 'y']
 m = Prophet(seasonality_mode='multiplicative', yearly_seasonality=True, weekly_seasonality=True)
 m.add_seasonality(name='monthly', period=30.44, fourier_order=5)
-m.fit(df)
+m.fit(df_prophet)
 future = m.make_future_dataframe(periods=365)
 forecast = m.predict(future)
 
