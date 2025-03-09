@@ -4,20 +4,17 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import numpy as np
 from prophet import Prophet
-from ta.trend import ADXIndicator  # For ADX calculation
 import os
 from streamlit.components.v1 import html
+from ta.trend import ADXIndicator
 
 # Load data
 current_path = os.getcwd()
 path = os.path.join(current_path, 'TTC_Delay_Analysis/data.csv')
 df = pd.read_csv(path)
-
-# Convert 'Date' column to datetime and set as index
-df['Date'] = pd.to_datetime(df['Date'])
-df.set_index('Date', inplace=True)
 
 # Set page config
 st.set_page_config(layout='wide', page_title="TTC Delays Analysis Report", page_icon="🚌")
@@ -164,21 +161,12 @@ st.markdown("""
 # Section 4: Rolling Average and ADX Analysis
 st.header("📈 Rolling Average and ADX Analysis")
 
-# Convert 'Date' column to datetime and set as index
+# Ensure 'Date' is in datetime format
 df['Date'] = pd.to_datetime(df['Date'])
-df.set_index('Date', inplace=True)
 
-# Debug: Print the first few rows of the DataFrame
-st.write("Debug: First few rows of the DataFrame after setting 'Date' as index:")
-st.write(df.head())
-
-# Calculate rolling average and ADX
-avg_delay_per_7_days = df['Min Delay'].resample('7D').mean()  # Resample by 7 days
+# Calculate rolling average and ADX without setting 'Date' as index
+avg_delay_per_7_days = df.resample('7D', on='Date')['Min Delay'].mean()  # Resample by 7 days
 rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()  # 30-day rolling average
-
-# Debug: Print the resampled data
-st.write("Debug: Resampled data (7-day average):")
-st.write(avg_delay_per_7_days.head())
 
 # Calculate ADX
 adx_indicator = ADXIndicator(
@@ -188,10 +176,6 @@ adx_indicator = ADXIndicator(
     window=14
 )
 adx_values = adx_indicator.adx()
-
-# Debug: Print the ADX values
-st.write("Debug: ADX values:")
-st.write(adx_values.head())
 
 # Plotting
 st.subheader("Rolling Average and ADX of Delays")
@@ -209,18 +193,18 @@ st.pyplot(fig)
 # Insights from Rolling Average and ADX
 st.header("🔍 Insights from Rolling Average and ADX")
 st.markdown("""
-    - **30-Day Rolling Average:** The rolling average smooths out short-term fluctuations, providing a clearer trend of delays over time.
-    - **ADX (Average Directional Index):** ADX measures the strength of the trend. Higher ADX values indicate stronger trends in delay patterns.
-    - **Trend Analysis:** Combining the rolling average and ADX helps identify periods of increasing or decreasing delays, aiding in proactive decision-making.
+    - **30-Day Rolling Average:** The rolling average shows fluctuations in delays over time, indicating variability in delay patterns.
+    - **ADX (Average Directional Index):** Despite the fluctuations in the rolling average, the ADX values are trending downward, suggesting a weakening trend in delay patterns.
+    - **Trend Analysis:** The combination of the rolling average and ADX indicates that while delays may fluctuate, the overall trend strength is decreasing, which could signal improving conditions or reduced variability in delays.
     """)
 
-# Section 5: Forecasting with Prophet
+# Section 4: Forecasting with Prophet
 st.header("🔮 Delay Forecast with Prophet")
-df_prophet = df[['Min Delay']].reset_index()
-df_prophet.columns = ['ds', 'y']
+df = df[['Date', 'Min Delay']]
+df.columns = ['ds', 'y']
 m = Prophet(seasonality_mode='multiplicative', yearly_seasonality=True, weekly_seasonality=True)
 m.add_seasonality(name='monthly', period=30.44, fourier_order=5)
-m.fit(df_prophet)
+m.fit(df)
 future = m.make_future_dataframe(periods=365)
 forecast = m.predict(future)
 

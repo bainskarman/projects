@@ -7,3 +7,5 @@ seaborn
 scikit-learn
 prophet
 joblib
+ta
+TA-Lib
