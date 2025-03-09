@@ -157,7 +157,39 @@ st.markdown("""
     - **Temporal Patterns of Delays:** Morning delays are influenced by increased passenger demand and potential carry-over delays from the night.
     """)
 
-# Section 4: Forecasting with Prophet
+# Section 4: Rolling Average and ADX Analysis
+st.header("📈 Rolling Average and ADX Analysis")
+
+# Calculate rolling average and ADX
+avg_delay_per_7_days = df.resample('7D', on='Date')['Min Delay'].mean()
+rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()
+
+# Calculate ADX
+adx_indicator = ADXIndicator(high=avg_delay_per_7_days, low=avg_delay_per_7_days, close=avg_delay_per_7_days, window=14)
+adx_values = adx_indicator.adx()
+
+# Plotting
+st.subheader("Rolling Average and ADX of Delays")
+fig, ax = plt.subplots(figsize=(18, 6))
+ax.plot(rolling_avg_30_days.index, rolling_avg_30_days.values, label='30-Day Rolling Avg Min Delay')
+ax.plot(avg_delay_per_7_days.index, avg_delay_per_7_days.values, label='Average Min Delay per 7 Days', color='orange')
+ax.plot(adx_values.index, adx_values.values, label='ADX', color='red')
+ax.set_title('Average Min Delay per 7 Days with 30-Day Rolling Avg and ADX')
+ax.set_xlabel('Date')
+ax.set_ylabel('Average Min Delay / ADX')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
+# Insights from Rolling Average and ADX
+st.header("🔍 Insights from Rolling Average and ADX")
+st.markdown("""
+    - **30-Day Rolling Average:** The rolling average smooths out short-term fluctuations, providing a clearer trend of delays over time.
+    - **ADX (Average Directional Index):** ADX measures the strength of the trend. Higher ADX values indicate stronger trends in delay patterns.
+    - **Trend Analysis:** Combining the rolling average and ADX helps identify periods of increasing or decreasing delays, aiding in proactive decision-making.
+    """)
+
+# Section 5: Forecasting with Prophet
 st.header("🔮 Delay Forecast with Prophet")
 df = df[['Date', 'Min Delay']]
 df.columns = ['ds', 'y']
