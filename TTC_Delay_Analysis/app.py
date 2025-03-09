@@ -161,11 +161,16 @@ st.markdown("""
 st.header("📈 Rolling Average and ADX Analysis")
 
 # Calculate rolling average and ADX
-avg_delay_per_7_days = df.resample('7D', on='Date')['Min Delay'].mean()
-rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()
+avg_delay_per_7_days = df['Min Delay'].resample('7D').mean()  # Resample by 7 days
+rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()  # 30-day rolling average
 
 # Calculate ADX
-adx_indicator = ADXIndicator(high=avg_delay_per_7_days, low=avg_delay_per_7_days, close=avg_delay_per_7_days, window=14)
+adx_indicator = ADXIndicator(
+    high=avg_delay_per_7_days,  # Use the same series for high, low, and close
+    low=avg_delay_per_7_days,
+    close=avg_delay_per_7_days,
+    window=14
+)
 adx_values = adx_indicator.adx()
 
 # Plotting
