@@ -164,9 +164,21 @@ st.markdown("""
 # Section 4: Rolling Average and ADX Analysis
 st.header("📈 Rolling Average and ADX Analysis")
 
+# Convert 'Date' column to datetime and set as index
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
+
+# Debug: Print the first few rows of the DataFrame
+st.write("Debug: First few rows of the DataFrame after setting 'Date' as index:")
+st.write(df.head())
+
 # Calculate rolling average and ADX
 avg_delay_per_7_days = df['Min Delay'].resample('7D').mean()  # Resample by 7 days
 rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()  # 30-day rolling average
+
+# Debug: Print the resampled data
+st.write("Debug: Resampled data (7-day average):")
+st.write(avg_delay_per_7_days.head())
 
 # Calculate ADX
 adx_indicator = ADXIndicator(
@@ -176,6 +188,10 @@ adx_indicator = ADXIndicator(
     window=14
 )
 adx_values = adx_indicator.adx()
+
+# Debug: Print the ADX values
+st.write("Debug: ADX values:")
+st.write(adx_values.head())
 
 # Plotting
 st.subheader("Rolling Average and ADX of Delays")
