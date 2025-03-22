@@ -10,11 +10,11 @@ import numpy as np
 st.set_page_config(page_title="Fair Fare", layout='wide', initial_sidebar_state='expanded')
 
 # Load data
-df = pd.read_excel("/workspaces/projects/Flight_Delay_End_to_End/Data_Train.xlsx")
+df = pd.read_excel("Data_Train.xlsx")
 
 # Load model with error handling
 try:
-    pipe = pickle.load(open('/workspaces/projects/Flight_Delay_End_to_End/Flight.pkl', 'rb'))
+    pipe = pickle.load(open('Flight.pkl', 'rb'))
 except (ValueError, FileNotFoundError) as e:
     st.error(f"Error loading the model: {e}")
     st.stop()
