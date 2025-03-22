@@ -7,31 +7,35 @@ from datetime import datetime
 import numpy as np
 
 import os
+import streamlit as st
+import pandas as pd
+import pickle
 
 # Set page configuration
 st.set_page_config(page_title="Fair Fare", layout='wide', initial_sidebar_state='expanded')
 
-# Define file paths
-data_file = "Data_Train.xlsx"
-model_file = "Flight.pkl"
+# Get current directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Load data using os
-if os.path.exists(data_file):
-    df = pd.read_excel(data_file)
+# Load data
+data_path = os.path.join(current_dir, "Data_Train.xlsx")
+if os.path.exists(data_path):
+    df = pd.read_excel(data_path)
 else:
-    st.error(f"Data file '{data_file}' not found.")
+    st.error(f"Data file not found: {data_path}")
     st.stop()
 
-# Load model with error handling using os
-if os.path.exists(model_file):
+# Load model with error handling
+model_path = os.path.join(current_dir, "Flight.pkl")
+if os.path.exists(model_path):
     try:
-        with open(model_file, 'rb') as f:
-            pipe = pickle.load(f)
-    except Exception as e:
+        with open(model_path, 'rb') as model_file:
+            pipe = pickle.load(model_file)
+    except (ValueError, pickle.UnpicklingError) as e:
         st.error(f"Error loading the model: {e}")
         st.stop()
 else:
-    st.error(f"Model file '{model_file}' not found.")
+    st.error(f"Model file not found: {model_path}")
     st.stop()
 
 
