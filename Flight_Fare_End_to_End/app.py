@@ -6,18 +6,34 @@ import seaborn as sns
 from datetime import datetime
 import numpy as np
 
+import os
+
 # Set page configuration
 st.set_page_config(page_title="Fair Fare", layout='wide', initial_sidebar_state='expanded')
 
-# Load data
-df = pd.read_excel("Data_Train.xlsx")
+# Define file paths
+data_file = "Data_Train.xlsx"
+model_file = "Flight.pkl"
 
-# Load model with error handling
-try:
-    pipe = pickle.load(open('Flight.pkl', 'rb'))
-except (ValueError, FileNotFoundError) as e:
-    st.error(f"Error loading the model: {e}")
+# Load data using os
+if os.path.exists(data_file):
+    df = pd.read_excel(data_file)
+else:
+    st.error(f"Data file '{data_file}' not found.")
     st.stop()
+
+# Load model with error handling using os
+if os.path.exists(model_file):
+    try:
+        with open(model_file, 'rb') as f:
+            pipe = pickle.load(f)
+    except Exception as e:
+        st.error(f"Error loading the model: {e}")
+        st.stop()
+else:
+    st.error(f"Model file '{model_file}' not found.")
+    st.stop()
+
 
 # Title and description
 st.title("Fair Fare")
