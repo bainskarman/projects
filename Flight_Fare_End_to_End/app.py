@@ -189,3 +189,12 @@ with col6:
     plt.xlabel("Source City")
     plt.ylabel("Price (INR)")
     st.pyplot(fig)
+
+# Load and display dashboard image
+dashboard_path = os.path.join(current_dir, "dashboard.png")
+
+if os.path.exists(dashboard_path):
+    st.title("Dashboard Overview")
+    st.image(dashboard_path, caption="Flight Data Dashboard", use_container_width=True)
+else:
+    st.error(f"Dashboard image not found: {dashboard_path}")
