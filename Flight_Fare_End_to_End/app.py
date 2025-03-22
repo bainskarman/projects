@@ -99,3 +99,93 @@ if st.button("Estimate Price and Duration"):
         st.write(f"### Estimated Price (USD): ${price_usd:,.2f}")
     else:
         st.error("Invalid prediction result. Please check the model output.")
+
+# Visualizations
+st.title("Flight Data Visualizations")
+
+
+# Function to convert duration to minutes
+def convert_duration_to_minutes(duration):
+    if 'h' in duration and 'm' in duration:
+        # Case: "2h 50m"
+        hours = int(duration.split('h')[0])
+        minutes = int(duration.split('m')[0].split()[-1])
+        return hours * 60 + minutes
+    elif 'h' in duration:
+        # Case: "19h"
+        hours = int(duration.split('h')[0])
+        return hours * 60
+    elif 'm' in duration:
+        # Case: "50m"
+        minutes = int(duration.split('m')[0])
+        return minutes
+    else:
+        # Handle unexpected cases
+        return 0
+
+# Apply the function to the Duration column
+df['Duration_Minutes'] = df['Duration'].apply(convert_duration_to_minutes)
+
+# Set up the layout for visualizations
+col1, col2 = st.columns(2)
+col3, col4 = st.columns(2)
+col5, col6 = st.columns(2)
+
+# Visualization 1: Average Price by Airline
+with col1:
+    st.subheader("Average Price by Airline")
+    avg_price_by_airline = df.groupby('Airline')['Price'].mean().sort_values(ascending=False)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(x=avg_price_by_airline.index, y=avg_price_by_airline.values, palette="viridis", ax=ax)
+    plt.xticks(rotation=45)
+    plt.xlabel("Airline")
+    plt.ylabel("Average Price (INR)")
+    st.pyplot(fig)
+
+# Visualization 2: Price Distribution by Number of Stops
+with col2:
+    st.subheader("Price Distribution by Number of Stops")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='Total_Stops', y='Price', data=df, palette="magma", ax=ax)
+    plt.xlabel("Number of Stops")
+    plt.ylabel("Price (INR)")
+    st.pyplot(fig)
+
+# Visualization 3: Flight Duration Distribution
+with col3:
+    st.subheader("Flight Duration Distribution")
+    df['Duration_Minutes'] = df['Duration'].apply(convert_duration_to_minutes)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.histplot(df['Duration_Minutes'], bins=30, kde=True, color='skyblue', ax=ax)
+    plt.xlabel("Duration (Minutes)")
+    plt.ylabel("Frequency")
+    st.pyplot(fig)
+    
+# Visualization 4: Price vs. Duration
+with col4:
+    st.subheader("Price vs. Duration")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(x='Duration_Minutes', y='Price', data=df, hue='Total_Stops', palette="coolwarm", ax=ax)
+    plt.xlabel("Duration (Minutes)")
+    plt.ylabel("Price (INR)")
+    st.pyplot(fig)
+
+# Visualization 5: Top 10 Routes by Average Price
+with col5:
+    st.subheader("Top 10 Routes by Average Price")
+    df['Route'] = df['Route'].str.replace(' → ', '-')
+    avg_price_by_route = df.groupby('Route')['Price'].mean().sort_values(ascending=False).head(10)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(x=avg_price_by_route.values, y=avg_price_by_route.index, palette="plasma", ax=ax)
+    plt.xlabel("Average Price (INR)")
+    plt.ylabel("Route")
+    st.pyplot(fig)
+
+# Visualization 6: Price Distribution by Source City
+with col6:
+    st.subheader("Price Distribution by Source City")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='Source', y='Price', data=df, palette="Set2", ax=ax)
+    plt.xlabel("Source City")
+    plt.ylabel("Price (INR)")
+    st.pyplot(fig)
