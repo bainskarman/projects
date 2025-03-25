@@ -82,7 +82,7 @@ if st.button('Predict Probability'):
 
     input_df = pd.DataFrame({'BattingTeam': [batting_team], 'Team2': [bowling_team], 'City': [selected_city],
                              'runs_left': [runs_left], 'balls_left': [balls_left], 'wickets_left': [wickets],
-                             'team1_runs': [target], 'crr': [crr], 'rrr': [rrr]})
+                              'crr': [crr], 'rrr': [rrr]})
 
     result = pipe.predict_proba(input_df)
     loss = result[0][0]
