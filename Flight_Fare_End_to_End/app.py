@@ -10,9 +10,20 @@ import os
 import streamlit as st
 import pandas as pd
 import pickle
-
+from streamlit.components.v1 import html
 # Set page configuration
 st.set_page_config(page_title="Fair Fare", layout='wide', initial_sidebar_state='expanded')
+
+# Title and description with links
+st.title("Fair Fare")
+st.write("Find the best flight options tailored to your needs.")
+
+# Add project links
+st.markdown(
+    '<a href="https://github.com/bainskarman/projects/tree/main/Flight_Fare_End_to_End" target="_blank">Detailed Project</a> | '
+    '<a href="https://public.tableau.com/app/profile/karman.bains8888/viz/FlightFares/Dashboard1?publish=yes" target="_blank">Dashboard</a>',
+    unsafe_allow_html=True
+)
 
 # Get current directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -131,6 +142,18 @@ col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
 col5, col6 = st.columns(2)
 
+
+
+def tableau_dashboard():
+    tableau_html = """
+    <div class='tableauPlaceholder' id='viz1743203317234' style='position: relative'><noscript><a href='#'><img alt='Flight Prices ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightFares&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FlightFares&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fl&#47;FlightFares&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743203317234');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1520px';vizElement.style.minHeight='587px';vizElement.style.maxHeight='787px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1520px';vizElement.style.minHeight='587px';vizElement.style.maxHeight='787px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='1127px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    """
+    return html(tableau_html, width=1300, height=1300)
+
+# Use in your app
+st.title("Flight Fares Dashboard")
+tableau_dashboard()
+
 # Visualization 1: Average Price by Airline
 with col1:
     st.subheader("Average Price by Airline")
@@ -189,12 +212,3 @@ with col6:
     plt.xlabel("Source City")
     plt.ylabel("Price (INR)")
     st.pyplot(fig)
-
-# Load and display dashboard image
-dashboard_path = os.path.join(current_dir, "dashboard.png")
-
-if os.path.exists(dashboard_path):
-    st.title("Dashboard Overview")
-    st.image(dashboard_path, caption="Flight Data Dashboard", use_container_width=True)
-else:
-    st.error(f"Dashboard image not found: {dashboard_path}")
