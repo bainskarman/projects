@@ -1,11 +1,9 @@
 streamlit
 pandas
-numpy==1.26
+numpy
 matplotlib
 plotly
 seaborn
 scikit-learn
 prophet
 joblib
-ta
-TA-Lib
