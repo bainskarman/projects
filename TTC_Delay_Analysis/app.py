@@ -9,7 +9,6 @@ import numpy as np
 from prophet import Prophet
 import os
 from streamlit.components.v1 import html
-from ta.trend import ADXIndicator
 
 # Load data
 current_path = os.getcwd()
@@ -139,14 +138,24 @@ st.markdown("""
 # Section 3: Tableau Reports
 st.header("📊 Tableau Reports")
 st.markdown("""
-    Below is an embedded Tableau dashboard providing additional insights into TTC delays.
+    Below are embedded Tableau dashboards providing insights into TTC delays and their geographic distribution.
     """)
-def tableau_component():
+
+def delay_dashboard_component():
     tableau_html_code = """
     <div class='tableauPlaceholder' id='viz1705632432757' style='position: relative'><noscript><a href='#'><img alt='TTC Bus Delay ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TTCDelayDash&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTCDelayDash&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1705632432757');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1650px';vizElement.style.height='887px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1650px';vizElement.style.height='887px';} else { vizElement.style.width='100%';vizElement.style.height='1727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
     """
-    return html(tableau_html_code, height=960, width=1750, scrolling=True)
-tableau_component()
+    return st.components.v1.html(tableau_html_code, height=960, width=1750, scrolling=True)
+
+def map_component():
+    tableau_map_html = """
+    <div class='tableauPlaceholder' id='viz1743143274465' style='position: relative'><noscript><a href='#'><img alt='Map ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;CM&#47;CMCDZ55W8&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;CMCDZ55W8' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;CM&#47;CMCDZ55W8&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743143274465');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    """
+    return st.components.v1.html(tableau_map_html, height=700, width=1750, scrolling=True)
+
+delay_dashboard_component()
+st.markdown("### Geographic Distribution of Subway Delays")
+map_component()
 
 # Insights from Tableau Reports
 st.header("🔍 Insights from Tableau Reports")
@@ -161,34 +170,12 @@ st.markdown("""
 # Section 4: Rolling Average and ADX Analysis
 st.header("📈 Rolling Average and ADX Analysis")
 
-# Ensure 'Date' is in datetime format
-df['Date'] = pd.to_datetime(df['Date'])
+# Load and display the ADX image from the same folder
+adx_image_path = os.path.join(os.path.dirname(__file__), "ADX.png")
 
-# Calculate rolling average and ADX without setting 'Date' as index
-avg_delay_per_7_days = df.resample('7D', on='Date')['Min Delay'].mean()  # Resample by 7 days
-rolling_avg_30_days = avg_delay_per_7_days.rolling(window=4).mean()  # 30-day rolling average
+st.image(adx_image_path, caption="Rolling Average and ADX of Delays", use_container_width=True)
 
-# Calculate ADX
-adx_indicator = ADXIndicator(
-    high=avg_delay_per_7_days,  # Use the same series for high, low, and close
-    low=avg_delay_per_7_days,
-    close=avg_delay_per_7_days,
-    window=14
-)
-adx_values = adx_indicator.adx()
 
-# Plotting
-st.subheader("Rolling Average and ADX of Delays")
-fig, ax = plt.subplots(figsize=(18, 6))
-ax.plot(rolling_avg_30_days.index, rolling_avg_30_days.values, label='30-Day Rolling Avg Min Delay')
-ax.plot(avg_delay_per_7_days.index, avg_delay_per_7_days.values, label='Average Min Delay per 7 Days', color='orange')
-ax.plot(adx_values.index, adx_values.values, label='ADX', color='red')
-ax.set_title('Average Min Delay per 7 Days with 30-Day Rolling Avg and ADX')
-ax.set_xlabel('Date')
-ax.set_ylabel('Average Min Delay / ADX')
-ax.legend()
-ax.grid(True)
-st.pyplot(fig)
 
 # Insights from Rolling Average and ADX
 st.header("🔍 Insights from Rolling Average and ADX")
