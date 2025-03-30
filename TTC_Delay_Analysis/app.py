@@ -9,6 +9,7 @@ import numpy as np
 from prophet import Prophet
 import os
 from streamlit.components.v1 import html
+from PyPDF2 import PdfReader
 
 # Load data
 current_path = os.getcwd()
@@ -175,6 +176,71 @@ adx_image_path = os.path.join(os.path.dirname(__file__), "ADX.png")
 
 st.image(adx_image_path, caption="Rolling Average and ADX of Delays", use_container_width=True)
 
+
+st.title("Power BI Report with Images")
+
+
+
+# Initialize session state for the current page
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = 0
+
+# Display the Power BI report
+st.markdown(
+    f'<iframe width="100%" height="600" src="https://app.powerbi.com/reportEmbed?reportId=3aa46b8e-572e-44fa-80cb-ba8226145eed" frameborder="0" allowFullScreen="true"></iframe>',
+    unsafe_allow_html=True
+)
+
+# Display the note with the ArcGIS limitation
+st.markdown(
+    """
+    <div style="background-color: #ffcc00; padding: 10px; border-radius: 5px; font-weight: bold; text-align: center;">
+        Note: Due to the limitations of the free version of ArcGIS, not all visuals may be visible to everyone. Thus, preview images are attached below.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+image_files = ["img2.png", "img3.png", "img4.png", "img5.png"]
+image_paths = [os.path.join(current_dir, img) for img in image_files]  # Full paths for images
+
+
+
+# Check if the images exist
+missing_images = [img for img in image_paths if not os.path.exists(img)]
+if missing_images:
+    st.error(f"Error: The following image files are missing: {', '.join(missing_images)}")
+    st.stop()
+
+try:
+    total_images = len(image_paths)
+    # Create two columns for displaying images side by side
+    col1, col2 = st.columns(2)
+    with col1:
+        # Display the first image with reduced size (e.g., 800px width)
+        st.image(image_paths[st.session_state.current_page], width=800)
+    with col2:
+        # Check if there is another image available for display
+        if st.session_state.current_page + 1 < total_images:
+            st.image(image_paths[st.session_state.current_page + 1], width=800)
+
+    # Navigation buttons
+    col1, col2, col3 = st.columns([1, 6, 1])
+    with col1:
+        if st.button("◀ Previous", disabled=st.session_state.current_page == 0):
+            st.session_state.current_page -= 1
+            st.rerun()
+    with col3:
+        if st.button("Next ▶", disabled=st.session_state.current_page == total_images - 2):  # Adjust for two images
+            st.session_state.current_page += 2  # Move by 2 for next page
+            st.rerun()
+
+    
+
+except Exception as e:
+    st.error(f"Error loading image: {str(e)}")
 
 
 # Insights from Rolling Average and ADX
