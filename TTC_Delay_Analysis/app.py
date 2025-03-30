@@ -185,10 +185,7 @@ if 'current_page' not in st.session_state:
     st.session_state.current_page = 0
 
 # Display the Power BI report
-st.markdown(
-    f'<iframe width="100%" height="600" src="https://app.powerbi.com/reportEmbed?reportId=3aa46b8e-572e-44fa-80cb-ba8226145eed" frameborder="0" allowFullScreen="true"></iframe>',
-    unsafe_allow_html=True
-)
+st.markdown("[Click here to view the Power BI report](https://app.powerbi.com/reportEmbed?reportId=3aa46b8e-572e-44fa-80cb-ba8226145eed)")
 
 # Display the note with the ArcGIS limitation
 st.markdown(
