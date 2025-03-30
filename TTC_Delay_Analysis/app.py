@@ -9,7 +9,6 @@ import numpy as np
 from prophet import Prophet
 import os
 from streamlit.components.v1 import html
-from PyPDF2 import PdfReader
 
 # Load data
 current_path = os.getcwd()
