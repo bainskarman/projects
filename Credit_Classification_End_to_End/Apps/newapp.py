@@ -19,6 +19,8 @@ st.set_page_config(page_title='Credit Classification', layout='wide',initial_sid
                         'About': '''Enter the following information to get your credit score for previous 12 months or select a profile from the given options. This is a mock-up intended for information only, if you wish to learn more about the model behind this please go to the GitHub [Credit Analysis](github.com/bainskarman/projects/Credit_Classification_End_to_End)''' })
 current_path = os.getcwd()
 path = os.path.join(current_path, 'Credit_Classification_End_to_End/Apps/final_pipeline.pkl.gz')
+df_path = os.path.join(current_path, 'Credit_Classification_End_to_End/Apps/cleaned.csv')
+data = pd.read_csv(df_path)
 with gzip.open(path, 'rb') as file:
     model = pickle.load(file)
 
@@ -196,3 +198,67 @@ if run:
 
         # Display the interactive plot using Streamlit
         st.plotly_chart(fig)
+columns_to_plot = [
+    "Age",
+    "Annual_Income",
+    "Num_Bank_Accounts",
+    "Num_Credit_Card",
+    "Num_of_Delayed_Payment",
+    "Credit_Utilization_Ratio",
+    "Total_EMI_per_month",
+    "Credit_History_Age_Formated"
+]
+
+# Get unique credit score categories
+if "Credit_Score" not in data.columns:
+    st.error("The dataset doesn't contain a 'Credit_Score' column.")
+    st.stop()
+
+credit_score_categories = data["Credit_Score"].unique()
+
+# Create tabs for each credit score category
+tabs = st.tabs([f"Credit Score: {category}" for category in credit_score_categories])
+
+for tab, category in zip(tabs, credit_score_categories):
+    with tab:
+        st.subheader(f"Distributions for Credit Score: {category}")
+        
+        # Filter data for current category
+        category_data = data[data["Credit_Score"] == category]
+        
+        # Create a grid of plots
+        cols_per_row = 2
+        rows = (len(columns_to_plot) + cols_per_row - 1) // cols_per_row
+        
+        for i in range(rows):
+            cols = st.columns(cols_per_row)
+            for j in range(cols_per_row):
+                idx = i * cols_per_row + j
+                if idx < len(columns_to_plot):
+                    col = columns_to_plot[idx]
+                    with cols[j]:
+                        st.write(f"**{col}**")
+                        
+                        # Create figure
+                        fig, ax = plt.subplots(figsize=(8, 4))
+                        
+                        # Plot distribution based on data type
+                        if pd.api.types.is_numeric_dtype(category_data[col]):
+                            sns.histplot(category_data[col], kde=True, ax=ax)
+                            ax.set_title(f"Distribution of {col}")
+                            ax.set_xlabel(col)
+                            ax.set_ylabel("Frequency")
+                        else:
+                            # For categorical or string data
+                            value_counts = category_data[col].value_counts().head(10)  # Limit to top 10
+                            sns.barplot(x=value_counts.index, y=value_counts.values, ax=ax)
+                            ax.set_title(f"Top values for {col}")
+                            ax.set_xlabel(col)
+                            ax.set_ylabel("Count")
+                            plt.xticks(rotation=45)
+                        
+                        st.pyplot(fig)
+                        plt.close()
+
+# Add some space at the bottom
+st.markdown("<br><br>", unsafe_allow_html=True)
