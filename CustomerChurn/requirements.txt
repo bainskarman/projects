@@ -1,15 +1,15 @@
-# Core dependencies
-streamlit==1.32.0
-plotly==5.18.0
-pandas==2.1.4
-numpy==1.26.3
+
+streamlit
+plotly
+pandas
+numpy
 
 # Machine learning
-scikit-learn==1.3.2
-joblib==1.3.2
+scikit-learn
+joblib
 
 # Optional for explainability
-shap==0.44.0
+shap
 
 # Additional visualization
-plotly-express==0.4.1
+plotly-express
