@@ -1,4 +1,4 @@
-# Data Science and Machine Learning Projects
+# Data Science Projects
 
 Welcome to my portfolio of Data Science and Machine Learning projects! This repository contains various applications and models developed for different purposes. Below, you'll find a brief overview of each project along with instructions for installation and usage.
 
