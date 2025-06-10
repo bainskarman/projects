@@ -1,7 +1,7 @@
 ﻿streamlit
 pandas
 numpy
-scikit-learn
+scikit-learn==1.6.1
 matplotlib
 seaborn
 openpyxl
