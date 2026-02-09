@@ -20,184 +20,114 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ==================== DARK MODE HANDLING ====================
-# Initialize session state for dark mode
-if 'dark_mode' not in st.session_state:
-    st.session_state.dark_mode = False
+# ==================== DARK MODE ONLY ====================
+# Set dark mode as default (no toggle)
+st.session_state.dark_mode = True
 
-def toggle_dark_mode():
-    st.session_state.dark_mode = not st.session_state.dark_mode
-
-# ==================== DYNAMIC CSS STYLING ====================
-if st.session_state.dark_mode:
-    st.markdown("""
-    <style>
-        /* Dark mode styling */
-        .stApp {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .main-header {
-            background: linear-gradient(90deg, #8B0000 0%, #660000 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .section-header {
-            color: #ffffff;
-            padding: 1rem 0;
-            margin: 2rem 0 1rem 0;
-            border-bottom: 3px solid #8B0000;
-            font-weight: 600;
-        }
-        
-        .chart-container {
-            background: #2d2d2d;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 1.5rem;
-            border: 1px solid #404040;
-        }
-        
-        .metric-card {
-            background: #2d2d2d;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            border-left: 4px solid #8B0000;
-            border: 1px solid #404040;
-        }
-        
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0.5rem 0;
-        }
-        
-        .metric-label {
-            font-size: 0.9rem;
-            color: #cccccc;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #333333 0%, #2a2a2a 100%);
-            border-left: 4px solid #8B0000;
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #ffffff;
-            border: 1px solid #404040;
-        }
-        
-        /* Chart background for dark mode */
-        .js-plotly-plot, .plotly, .modebar {
-            background: #2d2d2d !important;
-        }
-        
-        .stSelectbox, .stMultiselect, .stSlider {
-            background-color: #2d2d2d;
-            color: white;
-        }
-        
-        .st-bb, .st-at, .st-ae {
-            background-color: #2d2d2d !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-    <style>
-        /* Light mode styling */
-        .stApp {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .main-header {
-            background: linear-gradient(90deg, #CC0000 0%, #990000 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .section-header {
-            color: #2c3e50;
-            padding: 1rem 0;
-            margin: 2rem 0 1rem 0;
-            border-bottom: 3px solid #CC0000;
-            font-weight: 600;
-        }
-        
-        .chart-container {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            margin-bottom: 1.5rem;
-        }
-        
-        .metric-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            border-left: 4px solid #CC0000;
-        }
-        
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 0.5rem 0;
-        }
-        
-        .metric-label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid #CC0000;
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Common CSS for both modes
+# ==================== DARK MODE CSS STYLING ====================
 st.markdown("""
 <style>
+    /* Dark mode styling only */
+    .stApp {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .main-header {
+        background: linear-gradient(90deg, #8B0000 0%, #660000 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .section-header {
+        color: #ffffff !important;
+        padding: 1rem 0;
+        margin: 2rem 0 1rem 0;
+        border-bottom: 3px solid #8B0000;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+    
+    .chart-container {
+        background: #2d2d2d;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.5rem;
+        border: 1px solid #404040;
+    }
+    
+    .metric-card {
+        background: #2d2d2d;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-left: 4px solid #8B0000;
+        border: 1px solid #404040;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0.5rem 0;
+    }
+    
+    .metric-label {
+        font-size: 0.9rem;
+        color: #cccccc;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .info-box {
+        background: linear-gradient(135deg, #333333 0%, #2a2a2a 100%);
+        border-left: 4px solid #8B0000;
+        padding: 1.2rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #ffffff;
+        border: 1px solid #404040;
+    }
+    
+    /* Chart background for dark mode */
+    .js-plotly-plot, .plotly, .modebar {
+        background: #2d2d2d !important;
+    }
+    
+    .stSelectbox, .stMultiselect, .stSlider {
+        background-color: #2d2d2d;
+        color: white;
+    }
+    
+    .st-bb, .st-at, .st-ae {
+        background-color: #2d2d2d !important;
+    }
+    
+    /* Dark mode headings */
+    h2, h3, h4 {
+        color: #ffffff !important;
+    }
+    
     /* Common styling */
     .main-header h1 {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
+        color: #ffffff !important;
     }
     
     .main-header p {
         font-size: 1.1rem;
         opacity: 0.9;
+        color: rgba(255, 255, 255, 0.9) !important;
     }
     
     .stButton > button {
@@ -220,20 +150,20 @@ st.markdown("""
         margin-bottom: 0.3rem;
     }
     
-    /* Tab styling */
+    /* Tab styling for dark mode */
     .stTabs [data-baseweb="tab-list"] {
         gap: 1rem;
     }
     
     .stTabs [data-baseweb="tab"] {
-        background-color: #f1f1f1;
+        background-color: #404040;
+        color: white;
         border-radius: 5px 5px 0 0;
         padding: 0.5rem 1rem;
     }
     
-    /* Dark mode specific tab styling */
-    .stTabs [data-baseweb="tab"] .dark-mode {
-        background-color: #404040;
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background-color: #8B0000;
         color: white;
     }
     
@@ -246,6 +176,42 @@ st.markdown("""
         .metric-value {
             font-size: 1.5rem;
         }
+        
+        .section-header {
+            font-size: 1.3rem;
+        }
+    }
+    
+    /* Table styling */
+    .stDataFrame {
+        background-color: #2d2d2d;
+        color: white;
+    }
+    
+    /* Input fields */
+    .stTextInput > div > div > input,
+    .stNumberInput > div > div > input,
+    .stTextArea > div > div > textarea {
+        background-color: #2d2d2d;
+        color: white;
+        border-color: #404040;
+    }
+    
+    /* Select boxes */
+    .stSelectbox > div > div {
+        background-color: #2d2d2d;
+        color: white;
+    }
+    
+    /* Multi-select */
+    .stMultiSelect > div > div {
+        background-color: #2d2d2d;
+        color: white;
+    }
+    
+    /* Sliders */
+    .stSlider > div > div > div {
+        background-color: #404040;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -309,18 +275,12 @@ df = load_data()
 
 # ==================== COMPACT SIDEBAR ====================
 with st.sidebar:
-    # Dark mode toggle at the top
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.markdown("""
-        <div style="text-align: left; margin-bottom: 1rem;">
-            <h2 style="color: #CC0000; font-size: 1.3rem;">🚌 TTC Dashboard</h2>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        dark_mode_label = "🌙 Dark" if st.session_state.dark_mode else "☀️ Light"
-        if st.button(dark_mode_label, on_click=toggle_dark_mode, key="dark_mode_toggle"):
-            pass
+    # Dashboard title (removed dark mode toggle)
+    st.markdown("""
+    <div style="text-align: left; margin-bottom: 1rem;">
+        <h2 style="color: #CC0000; font-size: 1.3rem;">🚌 TTC Dashboard</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("---")
     
@@ -506,7 +466,7 @@ if st.session_state.active_section == "Overview":
     with col1:
         st.markdown('<div class="chart-container">', unsafe_allow_html=True)
         st.markdown("### 📋 Data Overview")
-        st.dataframe(df_filtered.head(10), use_container_width=True, height=300)
+        st.dataframe(df_filtered.head(10), height=300)
         st.caption(f"Showing 10 of {len(df_filtered):,} records")
         st.markdown('</div>', unsafe_allow_html=True)
     
@@ -529,7 +489,7 @@ if st.session_state.active_section == "Overview":
                     f"{delay_stats['max']:.1f}"
                 ]
             })
-            st.dataframe(stats_df, use_container_width=True, hide_index=True)
+            st.dataframe(stats_df, hide_index=True)
         st.markdown('</div>', unsafe_allow_html=True)
     
     # Methodology and Tools
@@ -595,9 +555,9 @@ elif st.session_state.active_section == "Time Analysis":
             
             fig.update_layout(
                 height=400,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 showlegend=True,
                 legend=dict(
                     title="Time of Day",
@@ -679,9 +639,9 @@ elif st.session_state.active_section == "Time Analysis":
             fig.update_layout(
                 height=500,
                 showlegend=False,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 margin=dict(t=50, b=50)
             )
             
@@ -711,9 +671,9 @@ elif st.session_state.active_section == "Time Analysis":
             
             fig.update_layout(
                 height=400,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 xaxis_title="Month",
                 yaxis_title="Average Delay (minutes)",
                 legend_title="Year"
@@ -744,9 +704,9 @@ elif st.session_state.active_section == "Time Analysis":
             
             fig.update_layout(
                 height=350,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 xaxis_title="Hour",
                 yaxis_title="Incident Count",
                 showlegend=False
@@ -785,9 +745,9 @@ elif st.session_state.active_section == "Route Analysis":
             
             fig.update_layout(
                 height=500,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 xaxis_title="Number of Delays",
                 yaxis_title="Route Name",
                 yaxis={'categoryorder': 'total ascending'},
@@ -823,9 +783,9 @@ elif st.session_state.active_section == "Route Analysis":
             
             fig.update_layout(
                 height=500,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 xaxis_title="Route Name",
                 yaxis_title="Average Delay (minutes)",
                 xaxis_tickangle=45,
@@ -859,9 +819,9 @@ elif st.session_state.active_section == "Route Analysis":
         
         fig.update_layout(
             height=450,
-            plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-            paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-            font_color='black' if not st.session_state.dark_mode else 'white',
+            plot_bgcolor='#2d2d2d',
+            paper_bgcolor='#2d2d2d',
+            font_color='white',
             xaxis_title="Month",
             yaxis_title="Average Delay (minutes)",
             xaxis_tickangle=45,
@@ -871,7 +831,7 @@ elif st.session_state.active_section == "Route Analysis":
                 y=0.99,
                 xanchor="left",
                 x=1.02,
-                bgcolor='rgba(255,255,255,0.8)' if not st.session_state.dark_mode else 'rgba(45,45,45,0.8)'
+                bgcolor='rgba(45,45,45,0.8)'
             ),
             margin=dict(r=150)  # Add right margin for legend
         )
@@ -900,7 +860,6 @@ elif st.session_state.active_section == "Route Analysis":
             # Display as a table
             st.dataframe(
                 top_routes_stats,
-                use_container_width=True,
                 column_config={
                     "Avg Delay": st.column_config.NumberColumn(format="%.1f min"),
                     "Median Delay": st.column_config.NumberColumn(format="%.1f min"),
@@ -942,9 +901,9 @@ elif st.session_state.active_section == "Route Analysis":
             
             fig.update_layout(
                 height=400,
-                plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                font_color='black' if not st.session_state.dark_mode else 'white',
+                plot_bgcolor='#2d2d2d',
+                paper_bgcolor='#2d2d2d',
+                font_color='white',
                 xaxis_title="Route",
                 yaxis_title="Average Delay (minutes)",
                 xaxis_tickangle=45,
@@ -1084,9 +1043,9 @@ elif st.session_state.active_section == "Forecasting":
                 
                 fig.update_layout(
                     height=500,
-                    plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                    paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                    font_color='black' if not st.session_state.dark_mode else 'white',
+                    plot_bgcolor='#2d2d2d',
+                    paper_bgcolor='#2d2d2d',
+                    font_color='white',
                     xaxis_title="Date",
                     yaxis_title="Delay (minutes)",
                     showlegend=True,
@@ -1095,7 +1054,7 @@ elif st.session_state.active_section == "Forecasting":
                         y=0.99,
                         xanchor="left",
                         x=0.01,
-                        bgcolor='rgba(255,255,255,0.8)' if not st.session_state.dark_mode else 'rgba(45,45,45,0.8)'
+                        bgcolor='rgba(45,45,45,0.8)'
                     )
                 )
                 
@@ -1109,7 +1068,7 @@ elif st.session_state.active_section == "Forecasting":
                     y='y',
                     title="Recent Historical Delay Data"
                 )
-                fig.update_layout(height=450)
+                fig.update_layout(height=450, plot_bgcolor='#2d2d2d', paper_bgcolor='#2d2d2d', font_color='white')
                 st.plotly_chart(fig, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
@@ -1170,9 +1129,9 @@ elif st.session_state.active_section == "Forecasting":
                 
                 fig_components.update_layout(
                     height=600,
-                    plot_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                    paper_bgcolor='white' if not st.session_state.dark_mode else '#2d2d2d',
-                    font_color='black' if not st.session_state.dark_mode else 'white',
+                    plot_bgcolor='#2d2d2d',
+                    paper_bgcolor='#2d2d2d',
+                    font_color='white',
                     showlegend=False,
                     margin=dict(t=50, b=40)  # Reduced top and bottom margins
                 )
@@ -1261,7 +1220,7 @@ elif st.session_state.active_section == "Tableau Dash":
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
         </script>
         """
-        return html(tableau_html_code, height=950, width=None, scrolling=False)
+        return html(tableau_html_code, height=950, scrolling=False)
     
     # Display the Tableau dashboard with full width
     tableau_dashboard_component()
@@ -1310,14 +1269,14 @@ elif st.session_state.active_section == "Power BI Dash":
     st.markdown("### 🔗 Access Power BI Dashboard")
     
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%); 
+    <div style="background: linear-gradient(135deg, #333333 0%, #2a2a2a 100%); 
                 border-left: 4px solid #0078d4; 
                 padding: 1.5rem; 
                 border-radius: 8px; 
                 margin: 1.5rem 0;
                 text-align: center;">
         <h4 style="color: #0078d4; margin-bottom: 1rem;">Interactive Power BI Dashboard</h4>
-        <p style="margin-bottom: 1.5rem;">For the complete interactive experience with all visualizations and filters, click the link below:</p>
+        <p style="margin-bottom: 1.5rem; color: #cccccc;">For the complete interactive experience with all visualizations and filters, click the link below:</p>
         <a href="https://app.powerbi.com/reportEmbed?reportId=3aa46b8e-572e-44fa-80cb-ba8226145eed" 
            target="_blank" 
            style="background: linear-gradient(90deg, #0078d4 0%, #005a9e 100%); 
@@ -1330,7 +1289,7 @@ elif st.session_state.active_section == "Power BI Dash":
                   transition: all 0.3s ease;">
            📊 Open Power BI Dashboard
         </a>
-        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
             <i>Note: You'll need appropriate permissions to access the Power BI report</i>
         </p>
     </div>
@@ -1365,8 +1324,7 @@ elif st.session_state.active_section == "Power BI Dash":
                 with cols[i]:
                     st.image(
                         existing_paths[idx],
-                        caption=f"Power BI Report Preview {idx + 1}",
-                        use_container_width=True
+                        caption=f"Power BI Report Preview {idx + 1}"
                     )
         
         # Navigation
